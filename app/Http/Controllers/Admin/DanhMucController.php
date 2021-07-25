@@ -25,10 +25,11 @@ class DanhMucController extends Controller
      */
     public function index()
     {
-        $data = $this->Danhmuc->getAll();
-        foreach ($data as $item){
-            echo $item->name;
-        }
+        // $data = $this->Danhmuc->getAll();
+        // foreach ($data as $item){
+        //     echo $item->name;
+        // }
+       return view('Admin.Danhmuc.index');
     }
 
     /**
@@ -38,6 +39,7 @@ class DanhMucController extends Controller
      */
     public function create()
     {
+        echo "111";
         //
     }
 
