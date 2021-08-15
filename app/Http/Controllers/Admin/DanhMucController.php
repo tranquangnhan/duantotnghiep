@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Repositories\Danhmuc\DanhmucRepository;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class DanhMucController extends Controller
 {
     private $Danhmuc;
@@ -25,11 +25,9 @@ class DanhMucController extends Controller
      */
     public function index()
     {
-        // $data = $this->Danhmuc->getAll();
-        // foreach ($data as $item){
-        //     echo $item->name;
-        // }
-       return view('Admin.Danhmuc.index');
+        $data = $this->Danhmuc->getAll();
+        
+       return view('Admin.Danhmuc.index',compact('data'));
     }
 
     /**
@@ -39,8 +37,7 @@ class DanhMucController extends Controller
      */
     public function create()
     {
-        echo "111";
-        //
+        return view('Admin.Danhmuc.create');
     }
 
     /**
@@ -51,7 +48,20 @@ class DanhMucController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+        ],[
+            'name.required'=>'Bạn chưa nhập tên danh mục',
+        ]);
+
+        $data = [
+            'name'=> $request->name,
+            'slug'=>Str::slug($request->name)
+        ];
+
+        $this->Danhmuc->create($data);
+        
+        return redirect('admin123/danhmuc')->with('success','Thêm thành công');
     }
 
     /**
@@ -73,7 +83,8 @@ class DanhMucController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data  = $this->Danhmuc->find($id);
+        return view('Admin.Danhmuc.edit',compact('data'));
     }
 
     /**
@@ -85,7 +96,20 @@ class DanhMucController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+        ],[
+            'name.required'=>'Bạn chưa nhập tên danh mục',
+        ]);
+
+        $data = [
+            'name'=> $request->name,
+            'slug'=>Str::slug($request->name)
+        ];
+
+        $this->Danhmuc->update($id,$data);
+        
+        return redirect('admin123/danhmuc')->with('success','Sửa thành công');
     }
 
     /**
@@ -96,6 +120,7 @@ class DanhMucController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->Danhmuc->delete($id);
+        return redirect('admin123/danhmuc')->with('success','Xoá thành công');
     }
 }

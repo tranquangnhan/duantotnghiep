@@ -6296,3 +6296,6 @@ div.hopscotch-bubble .hopscotch-content {
 a#cke_Upload_463 {
     display: none;
 }
+.border-error{
+    border: 1px solid red !important;
+}

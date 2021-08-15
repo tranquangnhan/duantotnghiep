@@ -31,21 +31,7 @@
             <!-- Topbar Start -->
             <div class="navbar-custom">
                 <ul class="list-unstyled topnav-menu float-right mb-0">
-                   
-                    <!-- <li class="d-none d-sm-block">
-                        <form class="app-search">
-                            <div class="app-search-box">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <div class="input-group-append">
-                                        <button class="btn" type="submit">
-                                            <i class="fe-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </li> -->
+                
         
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -227,19 +213,11 @@
                     <div id="sidebar-menu">
 
                         <ul class="metismenu" id="side-menu">
-                            <li>
-                                <a href="?ctrl=banner">
-                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span>Banner</span>
-                                    
-                                </a>
-                                
-                            </li>
-
+                         
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span> Phim </span>
+                                    <span> Dịch Vụ </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
@@ -255,8 +233,8 @@
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="?ctrl=categories&act=addnew">Thêm mới</a></li>
-                                    <li><a href="?ctrl=categories&act=index">Danh sách</a></li>
+                                    <li><a href="{{url('admin123/danhmuc/create')}}">Thêm mới</a></li>
+                                    <li><a href="{{url('admin123/danhmuc')}}">Danh sách</a></li>
                                 </ul>
                             </li>
                             <li>
