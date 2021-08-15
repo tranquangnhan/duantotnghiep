@@ -24,6 +24,8 @@ class ChamCongController extends Controller
      */
     public function index()
     {
+        $TEST = Controller::CHAMCONG_OFF;
+        dd($TEST);
         $data = $this->Chamcong->getAll();
         return $data;
     //    return view('Admin.Danhmuc.index',compact('data'));
