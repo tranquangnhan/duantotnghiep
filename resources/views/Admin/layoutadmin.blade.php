@@ -213,11 +213,11 @@
                     <div id="sidebar-menu">
 
                         <ul class="metismenu" id="side-menu">
-                         
+                                             
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span> Dịch Vụ </span>
+                                    <span> Đặt Lịch</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
@@ -225,7 +225,7 @@
                                     <li><a href="{{url('/admin123')}}">Danh sách</a></li>
                                 </ul>
                             </li>
-                            
+                                
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-page-layout-sidebar-left"></i>
@@ -238,21 +238,72 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="?ctrl=order">
+                                <a href="javascript: void(0);">
                                     <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span>Đơn hàng</span>
-                                    
+                                    <span> Dịch Vụ </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
-                                
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
+                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="?ctrl=contact">
+                                <a href="javascript: void(0);">
                                     <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span>Liên hệ</span>
-                                    
+                                    <span> Lương </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
-                                
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
+                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
+                                </ul>
                             </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
+                                    <span> Lịch </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
+                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
+                                    <span> Chấm Công </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
+                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
+                                    <span> Khách Hàng</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
+                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
+                                    <span>Đặt lịch</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
+                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
+                                </ul>
+                            </li>
+                         
                           
                         </ul>
 
