@@ -15,4 +15,6 @@ interface DanhmucRepositoryInterface
     public function update($id,$attributes = []);
 
     public function delete($id);
+
+    
 }

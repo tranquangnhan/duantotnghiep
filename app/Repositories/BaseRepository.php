@@ -57,7 +57,6 @@ abstract class BaseRepository implements RepositoryInterface{
 
             return true;
         }
-
         return false;
     }
 

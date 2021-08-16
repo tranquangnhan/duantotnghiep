@@ -16,7 +16,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->role ==1){
+        if(auth()->user()->role == env('ROLE_ADMIN')){
             return $next($request);
         }
         return redirect('home')->with('loi','Bạn không có quyền quản trị');

@@ -9,5 +9,5 @@ class DanhmucRepository extends BaseRepository implements DanhmucRepositoryInter
     public function getModel(){
         return \App\Models\Admin\DanhMucModel::class;
     }
-    
+   
 }
