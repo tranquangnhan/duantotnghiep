@@ -21,6 +21,7 @@
         <link href="{{ asset('admin/css') }}/SweetAlert2.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     </head>
 
     <body>
@@ -31,8 +32,8 @@
             <!-- Topbar Start -->
             <div class="navbar-custom">
                 <ul class="list-unstyled topnav-menu float-right mb-0">
-                
-        
+
+
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="fe-bell noti-icon"></i>
@@ -77,7 +78,7 @@
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="admin/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">
-                           admin<i class="mdi mdi-chevron-down"></i> 
+                                {{ auth()->user()->name }}<i class="mdi mdi-chevron-down"></i>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -98,7 +99,7 @@
                                 <span>Cài đặt</span>
                             </a>
 
-                            
+
 
                             <div class="dropdown-divider"></div>
 
@@ -150,7 +151,7 @@
                     <li>
                         <h4 class="page-title-main"></h4>
                     </li>
-        
+
                 </ul>
 
             </div>
@@ -165,7 +166,7 @@
                     <div class="user-box text-center">
                         <img src="admin/images/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
                         <div class="dropdown">
-                            <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown"  aria-expanded="false"> admin </a>
+                            <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown"  aria-expanded="false"> {{ auth()->user()->name }} </a>
                             <div class="dropdown-menu user-pro-dropdown">
 
                                 <!-- item-->
@@ -173,25 +174,25 @@
                                     <i class="fe-user mr-1"></i>
                                     <span>Tài khoản</span>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-settings mr-1"></i>
                                     <span>Settings</span>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-lock mr-1"></i>
                                     <span>Lock Screen</span>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-log-out mr-1"></i>
                                     <span>Logout</span>
                                 </a>
-    
+
                             </div>
                         </div>
                         <ul class="list-inline">
@@ -213,7 +214,7 @@
                     <div id="sidebar-menu">
 
                         <ul class="metismenu" id="side-menu">
-                                             
+
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-page-layout-sidebar-left"></i>
@@ -225,7 +226,7 @@
                                     <li><a href="{{url('/admin123')}}">Danh sách</a></li>
                                 </ul>
                             </li>
-                                
+
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-page-layout-sidebar-left"></i>
@@ -292,6 +293,18 @@
                                     <li><a href="{{url('/admin123')}}">Danh sách</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
+                                    <span>Đặt lịch</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
+                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
+                                </ul>
+                            </li>
+
 
                         </ul>
 
@@ -314,7 +327,7 @@
                         <div class="col-md-6">
                             2020 &copy;phát triển bởi <a href="">Quang Nhân</a>
                         </div>
-                      
+
                     </div>
                 </div>
             </footer>
@@ -403,7 +416,7 @@
     <!-- Dashboard init js-->
     <script src="{{ asset('admin/js') }}/pages/dashboard.init.js"></script>
 
-    
+
 
     <script src="{{ asset('admin/js') }}/pages/datatables.init.js"></script>
     <script src="{{ asset('admin/libs') }}/datatables/jquery.dataTables.min.js"></script>
@@ -438,6 +451,8 @@
     <script src="{{ asset('admin/js') }}/ckfinder.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"> </script>
     <script src="{{ asset('admin/js') }}/validate.js"></script>
+    <script src="{{ asset('admin/js') }}/longdeptrai.js"></script>
+
 </body>
 
 </html>

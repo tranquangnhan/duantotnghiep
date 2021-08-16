@@ -10,4 +10,9 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    const ROLE_ADMIN = 1;
+    const ROLE_NHANVIEN = 2;
+    const CHAMCONG_OFF = 0;
+    const CHAMCONG_ON = 1;
 }
