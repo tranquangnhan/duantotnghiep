@@ -24,11 +24,9 @@ class ChamCongController extends Controller
      */
     public function index()
     {
-        $TEST = Controller::CHAMCONG_OFF;
-        dd($TEST);
         $data = $this->Chamcong->getAll();
-        return $data;
-    //    return view('Admin.Danhmuc.index',compact('data'));
+
+        return view('Admin.Chamcong.index',compact('data'));
     }
 
     /**
@@ -94,6 +92,14 @@ class ChamCongController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($id > 0) {
+            $this->Chamcong->delete($id);
+
+            return response()->json([
+                'title' => 'Đã xóa!',
+                'text' => 'Chấm công id ' . $id . ' đã xóa thành công',
+                'status' => 'success'
+            ]);
+        }
     }
 }
