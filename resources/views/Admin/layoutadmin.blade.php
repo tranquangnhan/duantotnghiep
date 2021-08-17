@@ -1,58 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <base href="{{url('/')}}">
-    <meta charset="utf-8"/>
-    <title>ADMIN - Manage</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
-    <meta content="Coderthemes" name="author"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="admin/images/favicon.ico">
+    <head>
+        <base href="{{url('/')}}">
+        <meta charset="utf-8" />
+        <title>ADMIN - Manage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="admin/images/favicon.ico">
 
-    <!-- Bootstrap Css -->
-    <link href="{{ asset('admin/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css"/>
-    <!-- Icons Css -->
-    <link href="{{ asset('admin/css') }}/icons.min.css" rel="stylesheet" type="text/css"/>
-    <!-- App Css-->
-    <link href="{{ asset('admin/css') }}/app.css" id="app-stylesheet" rel="stylesheet" type="text/css"/>
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <link href="{{ asset('admin/css') }}/SweetAlert2.css" id="app-stylesheet" rel="stylesheet" type="text/css"/>
+        <!-- Bootstrap Css -->
+        <link href="{{ asset('admin/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{ asset('admin/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{ asset('admin/css') }}/app.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        <link href="{{ asset('admin/css') }}/SweetAlert2.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
-</head>
+    </head>
 <style>
     body {
         font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 </style>
-<body>
 
-<!-- Begin page -->
-<div id="wrapper">
+    <body>
 
-    <!-- Topbar Start -->
-    <div class="navbar-custom">
-        <ul class="list-unstyled topnav-menu float-right mb-0">
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <div class="navbar-custom">
+                <ul class="list-unstyled topnav-menu float-right mb-0">
 
 
-            <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button"
-                   aria-haspopup="false" aria-expanded="false">
-                    <i class="fe-bell noti-icon"></i>
-                    <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                    <li class="dropdown notification-list">
+                        <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <i class="fe-bell noti-icon"></i>
+                            <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-lg">
 
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h5 class="m-0">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="m-0">
                                     <span class="float-right">
                                         <a href="" class="text-dark">
                                             <small>Xoá Tất Cả</small>
@@ -421,64 +423,66 @@
                     class="mdi mdi-download mr-1"></i> Download Now</a>
         </div>
     </div>
-    <!-- end slimscroll-menu-->
 </div>
-<!-- /Right-bar -->
+    <!-- /Right-bar -->
 
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
 
-<a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">
-    <i class="mdi mdi-cog-outline mdi-spin"></i> &nbsp;Chọn Themes
-</a>
+    <a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">
+        <i class="mdi mdi-cog-outline mdi-spin"></i> &nbsp;Chọn Themes
+    </a>
 
-<!-- Vendor js -->
-<script src="{{ asset('admin/js') }}/vendor.min.js"></script>
+    <!-- Vendor js -->
+    <script src="{{ asset('admin/js') }}/vendor.min.js"></script>
 
-<!-- knob plugin -->
-<script src="{{ asset('admin/libs') }}/jquery-knob/jquery.knob.min.js"></script>
+    <!-- knob plugin -->
+    <script src="{{ asset('admin/libs') }}/jquery-knob/jquery.knob.min.js"></script>
 
-<!--Morris Chart-->
-<script src="{{ asset('admin/libs') }}/morris-js/morris.min.js"></script>
-<script src="{{ asset('admin/libs') }}/raphael/raphael.min.js"></script>
+    <!--Morris Chart-->
+    <script src="{{ asset('admin/libs') }}/morris-js/morris.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/raphael/raphael.min.js"></script>
 
-<!-- Dashboard init js-->
-<script src="{{ asset('admin/js') }}/pages/dashboard.init.js"></script>
+    <!-- Dashboard init js-->
+    <script src="{{ asset('admin/js') }}/pages/dashboard.init.js"></script>
 
 
-<script src="{{ asset('admin/js') }}/pages/datatables.init.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/jquery.dataTables.min.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/dataTables.bootstrap4.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/dataTables.responsive.min.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/responsive.bootstrap4.min.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/dataTables.buttons.min.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/buttons.bootstrap4.min.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/buttons.html5.min.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/buttons.flash.min.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/buttons.print.min.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/dataTables.keyTable.min.js"></script>
-<script src="{{ asset('admin/libs') }}/datatables/dataTables.select.min.js"></script>
-<script src="{{ asset('admin/libs') }}/pdfmake/pdfmake.min.js"></script>
-<script src="{{ asset('admin/libs') }}/pdfmake/vfs_fonts.js"></script>
-<!-- text editor -->
-<!-- App js -->
-<script src="{{ asset('admin/js') }}/app.min.js"></script>
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<!-- Plugins js -->
-<script src="{{ asset('admin/libs') }}/katex/katex.min.js"></script>
-<script src="{{ asset('admin/libs') }}/quill/quill.min.js"></script>
 
-<!-- init js -->
-<script src="{{ asset('admin/js') }}/pages/form-editor.init.js"></script>
-<!--end text editor -->
-<!-- sweet alert -->
-<script src="{{ asset('admin/js') }}/SweetAlert2.js"></script>
-<!-- end sweet alert -->
-<script src="{{ asset('admin/js') }}/home.js"></script>
-<script src="../lib/ckeditor/ckeditor.js"></script>
-<script src="{{ asset('admin/js') }}/ckfinder.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
-<script src="{{ asset('admin/js') }}/validate.js"></script>
+    <script src="{{ asset('admin/js') }}/pages/datatables.init.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/dataTables.bootstrap4.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/dataTables.buttons.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/buttons.html5.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/buttons.flash.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/buttons.print.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/dataTables.keyTable.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/datatables/dataTables.select.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/pdfmake/pdfmake.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/pdfmake/vfs_fonts.js"></script>
+    <!-- text editor -->
+        <!-- App js -->
+    <script src="{{ asset('admin/js') }}/app.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+      <!-- Plugins js -->
+    <script src="{{ asset('admin/libs') }}/katex/katex.min.js"></script>
+    <script src="{{ asset('admin/libs') }}/quill/quill.min.js"></script>
+
+    <!-- init js -->
+    <script src="{{ asset('admin/js') }}/pages/form-editor.init.js"></script>
+    <!--end text editor -->
+    <!-- sweet alert -->
+    <script src="{{ asset('admin/js') }}/SweetAlert2.js"></script>
+    <!-- end sweet alert -->
+    <script src="{{ asset('admin/js') }}/home.js"></script>
+    <script src="../lib/ckeditor/ckeditor.js"></script>
+    <script src="{{ asset('admin/js') }}/ckfinder.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"> </script>
+    <script src="{{ asset('admin/js') }}/validate.js"></script>
+    <script src="{{ asset('admin/js') }}/longdeptrai.js"></script>
+
 </body>
 
 </html>
