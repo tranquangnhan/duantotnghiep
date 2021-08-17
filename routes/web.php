@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Admin\ChamCongController;
 use App\Http\Controllers\Admin\DanhMucController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\NhansuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,19 +18,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('/test',[\App\Http\Controllers\Admin\DanhMucController::class,'index']);
+Route::get('/admin/dangnhapadmin', [\App\Http\Controllers\DangnhapAdminController::class, 'login']);
+Route::get('/admin/logout', [\App\Http\Controllers\DangnhapAdminController::class, 'logout']);
+Route::post('/admin/dangnhapadmin', [\App\Http\Controllers\DangnhapAdminController::class, 'checkin']);
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/logout', [LoginController::class,'logout']);
-
-Route::group(['prefix' => 'admin','middleware'=>['auth','Admin']],function (){
+Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
+    Route::get('/', [\App\Http\Controllers\DangnhapAdminController::class, 'index']);
     Route::resource('danhmuc', DanhMucController::class);
     Route::resource('chamcong', ChamCongController::class);
+    Route::resource('nhansu', NhansuController::class);
+    Route::post('nhansu/{id}', [NhansuController::class, 'update']);
 });

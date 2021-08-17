@@ -1,7 +1,7 @@
 @extends('Admin.layoutadmin')
 
 @section('content')
-    
+
 <div class="content-page">
     <div class="content">
 
@@ -77,5 +77,5 @@
     </div> <!-- content -->
 
 
-</div>   
+</div>
 @endsection
