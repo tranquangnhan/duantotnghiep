@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="">Mật khẩu</label><span style="color:red;"> (*)</span>
-                                            <input type="text" name="password" value="{{old('password')}}"  parsley-trigger="change"
+                                            <input type="password" name="password" value="{{old('password')}}"  parsley-trigger="change"
                                                    placeholder="Mật khẩu"  class="form-control" >
                                             @error('password')
                                             <span class="badge badge-danger">{{$message}}</span>

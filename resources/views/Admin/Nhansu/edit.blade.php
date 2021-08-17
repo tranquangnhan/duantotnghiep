@@ -92,7 +92,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="">Đổi mật khẩu</label><span style="color:red;"> (*)</span>
-                                            <input type="text" name="matkhau" value=""
+                                            <input type="password" name="matkhau" value=""
                                                    parsley-trigger="change"
                                                    placeholder="Mật khẩu" class="form-control">
                                         </div>
