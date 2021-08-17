@@ -202,7 +202,7 @@
 
                                 <div class="form-group text-right mb-0 mt-5">
                                     <button type="submit" name="them"
-                                            class="btn btn-primary waves-effect waves-light mr-1" id='add_product'>Thêm
+                                            class="btn btn-primary waves-effect waves-light mr-1" id='add_product'>Cập nhật
                                     </button>
                                     <a href="{{URL::to('/quantri/nhansu')}}"
                                        clas="btn btn-secondary waves-effect waves-light">Hủy</a>
