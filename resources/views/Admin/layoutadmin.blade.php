@@ -21,8 +21,19 @@
         <link href="{{ asset('admin/css') }}/SweetAlert2.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     </head>
+<style>
+    body {
+        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+</style>
 
     <body>
 
@@ -49,351 +60,370 @@
                                             <small>Xoá Tất Cả</small>
                                         </a>
                                     </span>Thông Báo
-                                </h5>
+                        </h5>
+                    </div>
+
+                    <div class="slimscroll noti-scroll">
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon bg-secondary">
+                                <i class="mdi mdi-heart"></i>
                             </div>
+                            <p class="notify-details">Chào mừng bạn đến với admin
+                                <b>admin</b>
+                                <small class="text-muted">13 phút trước</small>
+                            </p>
+                        </a>
+                    </div>
 
-                            <div class="slimscroll noti-scroll">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-secondary">
-                                        <i class="mdi mdi-heart"></i>
-                                    </div>
-                                    <p class="notify-details">Chào mừng bạn đến với admin
-                                        <b>admin</b>
-                                        <small class="text-muted">13 phút trước</small>
-                                    </p>
-                                </a>
-                            </div>
+                    <!-- All-->
+                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                        Xem tất cả
+                        <i class="fi-arrow-right"></i>
+                    </a>
 
-                            <!-- All-->
-                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                                Xem tất cả
-                                <i class="fi-arrow-right"></i>
-                            </a>
+                </div>
+            </li>
 
-                        </div>
-                    </li>
-
-                    <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="admin/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
-                            <span class="pro-user-name ml-1">
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
+                   role="button" aria-haspopup="false" aria-expanded="false">
+                    <img src="{{asset('admin/images/users/user-1.jpg')}}" alt="user-image" class="rounded-circle">
+                    <span class="pro-user-name ml-1">
                                 {{ auth()->user()->name }}<i class="mdi mdi-chevron-down"></i>
                             </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Chào mừng !</h6>
-                            </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                    <!-- item-->
+                    <div class="dropdown-header noti-title">
+                        <h6 class="text-overflow m-0">Chào mừng !</h6>
+                    </div>
 
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-user"></i>
-                                <span>Tài khoản</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-settings"></i>
-                                <span>Cài đặt</span>
-                            </a>
-
-
-
-                            <div class="dropdown-divider"></div>
-
-                            <!-- item-->
-                            <a href="{{url('/logout')}}" class="dropdown-item notify-item">
-                                <i class="fe-log-out"></i>
-                                <span>Đăng xuất</span>
-                            </a>
-
-                        </div>
-                    </li>
-
-                    <li class="dropdown notification-list">
-                        <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">
-                            <i class="fe-settings noti-icon"></i>
-                        </a>
-                    </li>
-
-
-                </ul>
-
-                <!-- LOGO -->
-                <div class="logo-box">
-                    <a href="index.html" class="logo logo-dark text-center">
-                        <span class="logo-lg">
-                            <img src="admin/images/logo-dark.png" alt="" height="16">
-                        </span>
-                        <span class="logo-sm">
-                            <img src="admin/images/logo-sm.png" alt="" height="24">
-                        </span>
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i class="fe-user"></i>
+                        <span>Tài khoản</span>
                     </a>
-                    <a href="index.html" class="logo logo-light text-center">
-                        <span class="logo-lg">
-                            <img src="admin/images/logo-light.png" alt="" height="16">
-                        </span>
-                        <span class="logo-sm">
-                            <img src="admin/images/logo-sm.png" alt="" height="24">
-                        </span>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i class="fe-settings"></i>
+                        <span>Cài đặt</span>
                     </a>
-                </div>
-
-                <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
-                    <li>
-                        <button class="button-menu-mobile disable-btn waves-effect">
-                            <i class="fe-menu"></i>
-                        </button>
-                    </li>
-
-                    <li>
-                        <h4 class="page-title-main"></h4>
-                    </li>
-
-                </ul>
-
-            </div>
-            <!-- end Topbar -->
-
-            <!-- ========== Left Sidebar Start ========== -->
-            <div class="left-side-menu">
-
-                <div class="slimscroll-menu">
-
-                    <!-- User box -->
-                    <div class="user-box text-center">
-                        <img src="admin/images/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
-                        <div class="dropdown">
-                            <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown"  aria-expanded="false"> {{ auth()->user()->name }} </a>
-                            <div class="dropdown-menu user-pro-dropdown">
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-user mr-1"></i>
-                                    <span>Tài khoản</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-settings mr-1"></i>
-                                    <span>Settings</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-lock mr-1"></i>
-                                    <span>Lock Screen</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-log-out mr-1"></i>
-                                    <span>Logout</span>
-                                </a>
-
-                            </div>
-                        </div>
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href="#" class="text-muted">
-                                    <i class="mdi mdi-cog"></i>
-                                </a>
-                            </li>
-
-                            <li class="list-inline-item">
-                                <a href="#">
-                                    <i class="mdi mdi-power"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!--- Sidemenu -->
-                    <div id="sidebar-menu">
-
-                        <ul class="metismenu" id="side-menu">
-
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span> Đặt Lịch</span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
-                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span> Danh mục</span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{url('admin123/danhmuc/create')}}">Thêm mới</a></li>
-                                    <li><a href="{{url('admin123/danhmuc')}}">Danh sách</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span> Dịch Vụ </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
-                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span> Lương </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
-                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span> Lịch </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
-                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span> Chấm Công </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
-                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span> Khách Hàng</span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
-                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-page-layout-sidebar-left"></i>
-                                    <span>Đặt lịch</span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{url('/admin123/addfilm')}}">Thêm mới </a></li>
-                                    <li><a href="{{url('/admin123')}}">Danh sách</a></li>
-                                </ul>
-                            </li>
 
 
-                        </ul>
+                    <div class="dropdown-divider"></div>
 
-                    </div>
-                    <!-- End Sidebar -->
-
-                    <div class="clearfix"></div>
+                    <!-- item-->
+                    <a href="{{url('/logout')}}" class="dropdown-item notify-item">
+                        <i class="fe-log-out"></i>
+                        <span>Đăng xuất</span>
+                    </a>
 
                 </div>
-                <!-- Sidebar -left -->
+            </li>
 
-            </div>
+            <li class="dropdown notification-list">
+                <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">
+                    <i class="fe-settings noti-icon"></i>
+                </a>
+            </li>
 
-            @yield('content')
 
-              <!-- Footer Start -->
-              <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            2020 &copy;phát triển bởi <a href="">Quang Nhân</a>
-                        </div>
+        </ul>
 
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
-
+        <!-- LOGO -->
+        <div class="logo-box">
+            <a href="index.html" class="logo logo-dark text-center">
+                        <span class="logo-lg">
+                            <img src="{{asset('admin/images/logo-dark.png')}}" alt="" height="16">
+                        </span>
+                <span class="logo-sm">
+                            <img src="{{asset('admin/images/logo-sm.png')}}" alt="" height="24">
+                        </span>
+            </a>
+            <a href="index.html" class="logo logo-light text-center">
+                        <span class="logo-lg">
+                            <img src="{{asset('admin/images/logo-light.png')}}" alt="" height="16">
+                        </span>
+                <span class="logo-sm">
+                            <img src="{{asset('admin/images/logo-sm.png')}}" alt="" height="24">
+                        </span>
+            </a>
         </div>
 
-        <!-- ============================================================== -->
-        <!-- End Page content -->
-        <!-- ============================================================== -->
+        <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
+            <li>
+                <button class="button-menu-mobile disable-btn waves-effect">
+                    <i class="fe-menu"></i>
+                </button>
+            </li>
 
+            <li>
+                <h4 class="page-title-main"></h4>
+            </li>
+
+        </ul>
 
     </div>
-    <!-- END wrapper -->
+    <!-- end Topbar -->
 
-    <!-- Right Sidebar -->
-    <div class="right-bar">
-        <div class="rightbar-title">
-            <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                <i class="mdi mdi-close"></i>
-            </a>
-            <h4 class="font-16 m-0 text-white">WEBSITE of nhân</h4>
-        </div>
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu">
+
         <div class="slimscroll-menu">
 
-            <div class="p-3">
-                <div class="alert alert-warning" role="alert">
-                    <strong>Nhân, </strong>Được phát triển bởi Nhân.
+            <!-- User box -->
+            <div class="user-box text-center">
+                <img src="{{asset('admin/images/users/user-1.jpg')}}" alt="user-img" title="Mat Helme"
+                     class="rounded-circle img-thumbnail avatar-md">
+                <div class="dropdown">
+                    <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown"
+                       aria-expanded="false"> {{ auth()->user()->name }} </a>
+                    <div class="dropdown-menu user-pro-dropdown">
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-user mr-1"></i>
+                            <span>Tài khoản</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-settings mr-1"></i>
+                            <span>Settings</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-lock mr-1"></i>
+                            <span>Lock Screen</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-log-out mr-1"></i>
+                            <span>Logout</span>
+                        </a>
+
+                    </div>
                 </div>
-                <div class="mb-2">
-                    <img src="admin/images/layouts/light.png" class="img-fluid img-thumbnail" alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-                    <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a href="#" class="text-muted">
+                            <i class="mdi mdi-cog"></i>
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="mdi mdi-power"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+
+                <ul class="metismenu" id="side-menu">
+
+                    @if(!empty(Auth::user()->role == 1))
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-page-layout-sidebar-left"></i>
+                                <span> Nhân sự</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="{{url('quantri/nhansu')}}">Danh sách </a></li>
+                                <li><a href="{{url('quantri/nhansu/create')}}">Thêm mới </a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span> Đặt Lịch</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('/quantri/addfilm')}}">Thêm mới </a></li>
+                            <li><a href="{{url('/quantri')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span> Danh mục</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('quantri/danhmuc/create')}}">Thêm mới</a></li>
+                            <li><a href="{{url('quantri/danhmuc')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span> Dịch Vụ </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('/quantri/addfilm')}}">Thêm mới </a></li>
+                            <li><a href="{{url('/quantri')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span> Lương </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('/quantri/addfilm')}}">Thêm mới </a></li>
+                            <li><a href="{{url('/quantri')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span> Lịch </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('/quantri/addfilm')}}">Thêm mới </a></li>
+                            <li><a href="{{url('/quantri')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span> Chấm Công </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('/quantri/addfilm')}}">Thêm mới </a></li>
+                            <li><a href="{{url('/quantri')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span> Khách Hàng</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('/quantri/addfilm')}}">Thêm mới </a></li>
+                            <li><a href="{{url('/quantri')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span>Đặt lịch</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('/quantri/addfilm')}}">Thêm mới </a></li>
+                            <li><a href="{{url('/quantri')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+
+            </div>
+            <!-- End Sidebar -->
+
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Sidebar -left -->
+
+    </div>
+
+@yield('content')
+
+<!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    2020 &copy;phát triển bởi <a href="">Quang Nhân</a>
                 </div>
 
-                <div class="mb-2">
-                    <img src="admin/images/layouts/dark.png" class="img-fluid img-thumbnail" alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="{{ asset('admin/css') }}/bootstrap-dark.min.css" data-appStyle="{{ asset('admin/css') }}/app-dark.min.css" />
-                    <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                </div>
-
-                <div class="mb-2">
-                    <img src="admin/images/layouts/rtl.png" class="img-fluid img-thumbnail" alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="{{ asset('admin/css') }}/app-rtl.min.css" />
-                    <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                </div>
-
-                <div class="mb-2">
-                    <img src="admin/images/layouts/dark-rtl.png" class="img-fluid img-thumbnail" alt="">
-                </div>
-                <div class="custom-control custom-switch mb-5">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch" data-bsStyle="{{ asset('admin/css') }}/bootstrap-dark.min.css" data-appStyle="{{ asset('admin/css') }}/app-dark-rtl.min.css" />
-                    <label class="custom-control-label" for="dark-rtl-mode-switch">Dark RTL Mode</label>
-                </div>
-
-                <a href="https://1.envato.market/k0YEM" class="btn btn-danger btn-block mt-3" target="_blank"><i class="mdi mdi-download mr-1"></i> Download Now</a>
             </div>
         </div>
-        <!-- end slimscroll-menu-->
+    </footer>
+    <!-- end Footer -->
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<!-- Right Sidebar -->
+<div class="right-bar">
+    <div class="rightbar-title">
+        <a href="javascript:void(0);" class="right-bar-toggle float-right">
+            <i class="mdi mdi-close"></i>
+        </a>
+        <h4 class="font-16 m-0 text-white">WEBSITE of nhân</h4>
     </div>
+    <div class="slimscroll-menu">
+
+        <div class="p-3">
+            <div class="alert alert-warning" role="alert">
+                <strong>Nhân, </strong>Được phát triển bởi Nhân.
+            </div>
+            <div class="mb-2">
+                <img src="{{asset('admin/images/layouts/light.png')}}" class="img-fluid img-thumbnail" alt="">
+            </div>
+            <div class="custom-control custom-switch mb-3">
+                <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked/>
+                <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
+            </div>
+
+            <div class="mb-2">
+                <img src="{{asset('admin/images/layouts/dark.png')}}" class="img-fluid img-thumbnail" alt="">
+            </div>
+            <div class="custom-control custom-switch mb-3">
+                <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch"
+                       data-bsStyle="{{ asset('admin/css') }}/bootstrap-dark.min.css"
+                       data-appStyle="{{ asset('admin/css') }}/app-dark.min.css"/>
+                <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
+            </div>
+
+            <div class="mb-2">
+                <img src="{{asset('admin/images/layouts/rtl.png')}}" class="img-fluid img-thumbnail" alt="">
+            </div>
+            <div class="custom-control custom-switch mb-3">
+                <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch"
+                       data-appStyle="{{ asset('admin/css') }}/app-rtl.min.css"/>
+                <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
+            </div>
+
+            <div class="mb-2">
+                <img src="{{asset('admin/images/layouts/dark-rtl.png')}}" class="img-fluid img-thumbnail" alt="">
+            </div>
+            <div class="custom-control custom-switch mb-5">
+                <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch"
+                       data-bsStyle="{{ asset('admin/css') }}/bootstrap-dark.min.css"
+                       data-appStyle="{{ asset('admin/css') }}/app-dark-rtl.min.css"/>
+                <label class="custom-control-label" for="dark-rtl-mode-switch">Dark RTL Mode</label>
+            </div>
+
+            <a href="https://1.envato.market/k0YEM" class="btn btn-danger btn-block mt-3" target="_blank"><i
+                    class="mdi mdi-download mr-1"></i> Download Now</a>
+        </div>
+    </div>
+</div>
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
