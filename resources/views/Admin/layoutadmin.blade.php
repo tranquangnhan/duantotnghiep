@@ -303,8 +303,8 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="{{url('/quantri/addfilm')}}">Thêm mới </a></li>
-                            <li><a href="{{url('/quantri')}}">Danh sách</a></li>
+                            <li><a href="{{url('/quantri/chamcong')}}">Chấm công </a></li>
+                            <li><a href="{{url('/quantri/chamcong/cuatoi/' . auth()->user()->id)}}">Xem chấm công </a></li>
                         </ul>
                     </li>
                     <li>
@@ -482,7 +482,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"> </script>
     <script src="{{ asset('admin/js') }}/validate.js"></script>
     <script src="{{ asset('admin/js') }}/longdeptrai.js"></script>
-
+    @yield('script')
 </body>
 
 </html>

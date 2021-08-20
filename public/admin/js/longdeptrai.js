@@ -23,7 +23,7 @@ $(document).ready(function () {
         })
         .then((result) => {
             if (result.isConfirmed) {
-                let url = 'admin/' + route + '/' + id
+                let url = 'quantri/' + route + '/' + id
 
                 let data = {
                     "_token": $('input[name=_token]').val(),

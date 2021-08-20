@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ChamCongController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NhansuController;
+use App\Models\admin\ChamCongModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +29,13 @@ Route::post('/admin/dangnhapadmin', [\App\Http\Controllers\DangnhapAdminControll
 Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::get('/', [\App\Http\Controllers\DangnhapAdminController::class, 'index']);
     Route::resource('danhmuc', DanhMucController::class);
+
     Route::resource('chamcong', ChamCongController::class);
+    Route::group(['prefix' => 'chamcong'], function (){
+        Route::get('/cuatoi/{id}', [ChamCongController::class, 'chamcongcuatoi']);
+    });
+    Route::get('/xinnghi', [ChamCongController::class, 'viewXinNghi']);
+
     Route::resource('nhansu', NhansuController::class);
     Route::post('nhansu/{id}', [NhansuController::class, 'update']);
 });

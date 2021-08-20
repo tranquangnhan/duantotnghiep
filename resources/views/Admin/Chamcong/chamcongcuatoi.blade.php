@@ -14,7 +14,7 @@
                     <div class="card-box">
                         <h4 class="mt-0 header-title">Chấm Công </h4>
                         <p class="text-muted font-14 mb-3">
-                            Lịch sử chấm công
+                            Chấm công của tôi
                         </p>
                         @if (Session::has('success'))
                             <div class="alert alert-success">
@@ -27,8 +27,7 @@
                         @endif
                         <div class="control_">
                             <a href="/quantri/chamcong/create" class="btn btn-primary" style="color: white;">Chấm công</a>
-                            <a href="{{url('/quantri/xinnghi')}}" class="btn btn-success" style="color: white;">Xin nghỉ</a>
-                            <a href="{{url('/quantri/chamcong/cuatoi/' . auth()->user()->id)}}" class="btn btn-info" style="color: white;">Chấm công của tôi</a>
+                            <a href="/quantri/xinnghi" class="btn btn-warning" style="color: white;">Xin nghỉ</a>
                         </div>
                         <table class="table mb-0" id="table_product">
                                 <thead class="thead-light">
@@ -43,9 +42,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $row)
+                                    @foreach ($listChamCong as $row)
                                         <tr>
-                                            <td>{{ $loop->index + 1 }} ID: {{ $row->id }}</td>
+                                            <td>{{ $loop->index + 1 }}</td>
                                             <td class="" >{{$row->nhansu->name}}</td>
                                             <td class="" >{{ date('d-m-Y', strtotime($row->ngay)) }}</td>
                                             <td class="" >{{ date("H:i:s", $row->checkin) }}</td>
@@ -65,6 +64,7 @@
                                                         {!!method_field('delete')!!}
                                                         <meta name="csrf-token" content="{{ csrf_token() }}">
                                                         <button type="button" class="btn btn-danger delete-btn" delete-id="{{ $row->id }}" delete-route="chamcong" ><i class="fa fa-trash"></i></button>
+                                                        {{-- <button type="submit">Xoa</button> --}}
                                                     </form>
                                                 @else
                                                     <button type="button" class="btn btn-dark" style="cursor: context-menu"><i class="fa fa-trash"></i></button>
@@ -97,3 +97,4 @@
 
 </div>
 @endsection
+
