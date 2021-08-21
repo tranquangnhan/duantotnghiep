@@ -266,6 +266,17 @@
                     <li>
                         <a href="javascript: void(0);">
                             <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span> Cơ sở</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('quantri/coso/create')}}">Thêm mới</a></li>
+                            <li><a href="{{url('quantri/coso')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
                             <span> Dịch Vụ </span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -435,6 +446,60 @@
 
     <!-- Vendor js -->
     <script src="{{ asset('admin/js') }}/vendor.min.js"></script>
+
+        <script type="text/javascript">
+    $(document).ready(function(){
+        $('.them').click(function(){
+          var name = $('.name').val();
+          var city = $('.city').val();
+          var province = $('.province').val();
+          var wards = $('.wards').val();
+          var _token = $('input[name="_token"]').val();
+
+          $.ajax({
+            url: '{{url("/quantri/add-dellivery")}}',
+            method:'POST',
+            data:{name:name,city:city,province:province,wards:wards,_token:_token},
+            complete: function () {
+        // Handle the complete event
+        window.location.replace("quantri/coso");
+
+        alert('thêm cơ sở thành công');
+      }
+
+            });
+        });
+
+    });
+
+
+    $('.choose').on('change',function(){
+        var action = $(this).attr('id');
+        var ma_id = $(this).val();
+        var _token = $('input[name="_token"]').val();
+
+        var result = '';
+
+        if(action=='city'){
+            result = 'province';
+        }else{
+            result = 'wards';
+        }
+        $.ajax({
+
+            url: '{{url("/quantri/select-dellivery")}}',
+        //    cache: false,
+        //      contentType: false,
+        //     processData: false,
+            method:'POST',
+            data:{action:action,ma_id:ma_id,_token:_token},
+            success:function(data){
+               $('#'+result).html(data);
+            }
+        });
+    });
+
+    </script>
 
     <!-- knob plugin -->
     <script src="{{ asset('admin/libs') }}/jquery-knob/jquery.knob.min.js"></script>

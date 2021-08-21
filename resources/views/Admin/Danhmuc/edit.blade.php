@@ -1,7 +1,7 @@
 
 @extends('Admin.layoutadmin')
 @section('content')
-  
+
     <div class="content-page">
         <div class="content">
 
@@ -40,7 +40,7 @@
                                             <input type="text" name="name"   value="{{$data->name}}" parsley-trigger="change" required
                                                    placeholder="Tên Thể Loại"  class="form-control @error('name') border-error @enderror" >
                                         </div>
-            
+
                                     </div>
 
                                 </div>

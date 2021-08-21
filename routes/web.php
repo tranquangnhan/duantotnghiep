@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ChamCongController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NhansuController;
+use App\Http\Controllers\Admin\CosoController;
 use App\Models\admin\ChamCongModel;
 use Illuminate\Support\Facades\Route;
 
@@ -38,4 +39,10 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
 
     Route::resource('nhansu', NhansuController::class);
     Route::post('nhansu/{id}', [NhansuController::class, 'update']);
+
+    Route::resource('coso', CosoController::class);
+    Route::get('/delivery', [CosoController::class,'create']);
+    Route::post('/select-dellivery', [CosoController::class,'select_dellivery']);
+    Route::post('/add-dellivery', [CosoController::class,'add_dellivery']);
+    Route::post('/update', [CosoController::class,'update']);
 });

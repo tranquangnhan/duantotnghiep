@@ -39,7 +39,7 @@ class NhansuController extends Controller
      */
     public function create()
     {
-        $data=$this->dichvu->getAll();
+        $data=$this->nhansu->getAll();
         return view('Admin.Nhansu.create', compact('data'));
     }
 
