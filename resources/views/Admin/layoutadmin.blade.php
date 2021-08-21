@@ -115,7 +115,7 @@
                     <div class="dropdown-divider"></div>
 
                     <!-- item-->
-                    <a href="{{url('/logout')}}" class="dropdown-item notify-item">
+                    <a href="{{url('/admin/logout')}}" class="dropdown-item notify-item">
                         <i class="fe-log-out"></i>
                         <span>Đăng xuất</span>
                     </a>
