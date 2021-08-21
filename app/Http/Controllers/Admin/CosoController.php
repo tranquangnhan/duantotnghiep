@@ -59,6 +59,7 @@ class CosoController extends Controller
                 $select_province = Province::where('matp',$data['ma_id'])->orderby('maqh','ASC')->get();
                     $output.='<option>---Chọn quận huyện---</option>';
                 foreach($select_province as $key => $province){
+
                     $output.='<option value="'.$province->maqh.'">'.$province->name_quanhuyen.'</option>';
                 }
 
@@ -122,7 +123,9 @@ class CosoController extends Controller
 
     $data  = $this->Coso->find($id);
     $city = City::orderby('matp','ASC')->get();
-    return view('Admin.coso.edit',compact('data','city'));
+    $province= Province::orderBy('maqh', 'ASC')->get();
+    $wards= Wards::orderBy('xaid', 'ASC')->get();
+    return view('Admin.coso.edit',compact('data','city','province','wards'));
 
     }
 
