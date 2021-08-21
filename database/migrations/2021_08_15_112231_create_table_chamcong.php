@@ -15,9 +15,9 @@ class CreateTableChamcong extends Migration
     {
         Schema::create('chamcong', function (Blueprint $table) {
             $table->id();
-            $table->integer('check_in');
-            $table->integer('check_out');
-            $table->integer('ngay');
+            $table->integer('checkin');
+            $table->integer('checkout')->nullable();
+            $table->date('ngay');
             $table->integer('idns');
             $table->integer('trangthai');
             $table->timestamps();

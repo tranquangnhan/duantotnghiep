@@ -61,7 +61,7 @@ class DanhMucController extends Controller
 
         $this->Danhmuc->create($data);
         
-        return redirect('admin123/danhmuc')->with('success','Thêm thành công');
+        return redirect('quantri/danhmuc')->with('success','Thêm thành công');
     }
 
     /**
@@ -109,7 +109,7 @@ class DanhMucController extends Controller
 
         $this->Danhmuc->update($id,$data);
         
-        return redirect('admin123/danhmuc')->with('success','Sửa thành công');
+        return redirect('quantri/danhmuc')->with('success','Sửa thành công');
     }
 
     /**
@@ -121,6 +121,6 @@ class DanhMucController extends Controller
     public function destroy($id)
     {
         $this->Danhmuc->delete($id);
-        return redirect('admin123/danhmuc')->with('success','Xoá thành công');
+        return redirect('quantri/danhmuc')->with('success','Xoá thành công');
     }
 }
