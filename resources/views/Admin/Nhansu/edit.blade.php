@@ -66,9 +66,10 @@
                     <div class="col-xl-12">
                         <div class="card-box">
                             <h4 class="header-title mt-0 mb-3 btn btn-success">SỬA THÔNG TIN NHÂN SỰ</h4>
-                            <form data-parsley-validate action="{{URL::to('quantri/nhansu/'.$data[0]['id'])}}" id="formadd" role="form"
+                            <form data-parsley-validate action="{{route('nhansu.update',$data[0]['id'])}}" id="formadd" role="form"
                                 method="post" enctype="multipart/form-data">
                                 @csrf
+                                {!! method_field('put') !!}
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
