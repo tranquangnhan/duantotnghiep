@@ -46,7 +46,7 @@
 
         }
 
-        &
+
         :hover {
 
             background-position: 0 -100%;
