@@ -217,9 +217,4 @@ class ChamCongController extends Controller
         }
     }
 
-    public function viewXinNghi(Request $request)
-    {
-
-        return view('Admin.Chamcong.xinnghi');
-    }
 }

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use DB;
-$today = date("Y-m-d");
 
 class them_chamcong extends Seeder
 {
