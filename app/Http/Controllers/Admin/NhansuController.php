@@ -8,7 +8,7 @@ use App\Repositories\Dichvu\DichvuRepositoryInterface;
 use App\Repositories\Nhansu\NhansuRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+
 
 class NhansuController extends Controller
 {
