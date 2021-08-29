@@ -3,8 +3,7 @@
 
 namespace App\Repositories\Dichvu;
 
-
-use App\Models\Dichvu;
+use App\Models\Admin\DichvuModel;
 use App\Repositories\BaseRepository;
 
 class DichvuRepository extends BaseRepository implements DichvuRepositoryInterface
@@ -13,11 +12,21 @@ class DichvuRepository extends BaseRepository implements DichvuRepositoryInterfa
 
     public function getModel()
     {
-        return Dichvu::class;
+        return DichvuModel::class;
     }
 
-    public function getDichvu()
+    public function getDichVu()
     {
-        return $this->model->getAll();
+        return $this->model->select('dichvu.*', 'danhmuc.name')
+        ->join('danhmuc', 'dichvu.iddm', '=', 'danhmuc.id')
+        ->get();
+    }
+
+    public function editDichvu($id)
+    {
+        return $this->model->select('dichvu.*', 'dichvu.id','danhmuc.name')
+            ->join('danhmuc', 'dichvu.iddm', '=', 'danhmuc.id')
+            ->where('dichvu.id', $id)
+            ->get();
     }
 }
