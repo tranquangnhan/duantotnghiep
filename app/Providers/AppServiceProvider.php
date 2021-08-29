@@ -8,6 +8,8 @@ use App\Repositories\Dichvu\DichvuRepository;
 use App\Repositories\Dichvu\DichvuRepositoryInterface;
 use App\Repositories\Nhansu\NhansuRepository;
 use App\Repositories\Nhansu\NhansuRepositoryInterface;
+use App\Repositories\Sukien\SukienRepository;
+use App\Repositories\Sukien\SukienRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(DanhmucRepositoryInterface::class,DanhmucRepository::class);
         $this->app->singleton(NhansuRepositoryInterface::class,NhansuRepository::class);
         $this->app->singleton(DichvuRepositoryInterface::class,DichvuRepository::class);
+        $this->app->singleton(SukienRepositoryInterface::class,SukienRepository::class);
     }
 
     /**

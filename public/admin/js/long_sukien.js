@@ -4,10 +4,10 @@ var danhSachSuKien = [
     {'ten': 'Meeting'}
 ]
 
-var id_us = $('#id_us').val();
 var url_sukien = '/quantri/sukien';
 var url_sukien_action = url_sukien + '/action';
 var url_fetch = '/quantri/getSuKien';
+var url_getNhanSu = '/quantri/getNhanSu';
 
 var type_error = 'error';
 var type_success = 'success';
@@ -16,6 +16,9 @@ var text_error_date = 'Vui lòng chọn trước ngày hiện tại một ngày'
 var text_error_permision = 'Bạn không có quyền sửa';
 var notRevert = false;
 var revert = true;
+
+var id_us = $('#id_us').val();
+var nhanSuLogin = getNhanSuNotAsync(id_us);
 
 $.ajaxSetup({
     headers: {
@@ -49,13 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 var start = moment(info.start).format("YYYY-MM-DD HH:mm:ss");
                 var end = moment(info.end).format("YYYY-MM-DD HH:mm:ss");
 
-                var html = getClickHTML(info);
+                getClickHTML(info);
 
-                Swal.fire({
-                    title: 'Thông Tin Lịch Hẹn',
-                    html: html,
-                    showConfirmButton: false,
-                });
             } else {
                 sweetAlert(type_error, title_error, text_error_date, info, notRevert);
             }
@@ -252,59 +250,129 @@ function formSelectHTML()
 }
 
 function getClickHTML(info) {
-    var idUserAction = info.event.extendedProps.idns;
-    if (checkUser(idUserAction)) {
+    var idUser = info.event.extendedProps.idns;
+    if (checkUser(idUser)) {
         var html = editHTML(info);
+        Swal.fire({
+            title: 'Thông Tin Lịch Hẹn',
+            html: html,
+            customClass: {
+                content: 'content-class',
+            },
+            showConfirmButton: false,
+        });
     } else {
-        var html = viewHTML(info);
+        // Show thông tin lịch hẹn
+        getInfoNhanSu(info, idUser);
     }
-
-    return html;
 }
 
-function viewHTML(info) {
-    var idUser = info.event.extendedProps.idns;
-    var nhansu = getInfoNhanSu(idUser);
-    var mota = info.event.extendedProps.mota;
-    var idSukien = info.event.id;
-    var loai = info.event.extendedProps.loai;
-    if (mota == null) {
-        mota = '';
-    }
+function viewHTML(info, nhansu) {
+    var event = info.event;
+    var eventedProps = info.event.extendedProps;
+    var start = moment(event.start).format("HH:mm:ss DD-MM-YYYY");
+    var end = moment(event.end).format("HH:mm:ss DD-MM-YYYY");
+    var trangThaiSuKien = getTrangThaiSuKien(eventedProps);
+    if (eventedProps.mota == null) { eventedProps.mota = ''; }
     var html =
     `
-    <div class="select-sukien text-left">
+    <div class="view-sukien text-left mt-2">
         <div class="row">
             <div class="col-5 p-0 text-center">
                 <img src="image/avt.png" class="img-fluid mx-auto" style="width:100px" alt="">
-                <br><b>Long Nguyễn</b>
+                <br><b>${nhansu.name}</b>
                 <div class="time">
-                    <span>Từ: </span> 2021-09-03 00:00:00 <br>
-                    <span>Đến: </span> 2021-09-04 00:00:00
+                    <span>Từ: </span> ${start} <br>
+                    <span>Đến: </span> ${end}
                 </div>
             </div>
             <div class="col-7" style="padding-right: 0px;">
-                <h5 class="m-0"><b>Xin nghỉ ngày 28/9/2001</b></h5>
-                <h6  class="my-1"><span  style="text-decoration: underline;">Xin nghi</span> <span class="badge bg-dark">Chưa cấp phép</span> </h6>
-                <p>Vào hôm 28/9 em có lịch học 2 buổi sáng và chiều, em xin phép được nghỉ vào 2 hôm đó</p>
-                <button class="btn btn-primary waves-effect width-md waves-light">Cấp phép</button>
-            </div>
+                <h5 class="m-0"><b>${event.title}</b></h5>
+                <span class="badge bg-${trangThaiSuKien.classe}">${trangThaiSuKien.ten}</span>
+                <p>${eventedProps.mota}</p> `;
+            if (!eventedProps.loai == LOAI_SUKIEN) {
+                if (eventedProps.trangthai == STATUS_XIN_NGHI) {
+                    html +=
+                    `<button class="btn btn-primary float-right waves-effect width-md waves-light" onclick="updateTrangThaiXinNghi(`+event.id+`, `+nhansu.id+`, `+STATUS_ACCEPT_XIN_NGHI+`, '`+start+`');">
+                        Cấp phép
+                    </button>`;
+                }
+                if (eventedProps.trangthai == STATUS_ACCEPT_XIN_NGHI) {
+                    html +=
+                    `<button class="btn btn-danger float-right waves-effect width-md waves-light" onclick="updateTrangThaiXinNghi(`+event.id+`, `+nhansu.id+`, `+STATUS_XIN_NGHI+`, '`+start+`');">
+                        Hủy cấp phép
+                    </button>`;
+                }
+            }
+    html += `</div>
         </div>
-
-    </div>
-    `;
+    </div>`;
 
     return html;
 }
 
-function getInfoNhanSu(idns) {
-    $.ajax({
-        url: '',
+function getTrangThaiSuKien(eventedProps) {
+    var ten = '';
+    var classe = '';
+    if (eventedProps.loai == LOAI_SUKIEN) {
+        ten = 'Sự kiện';
+        classe = 'success';
+    }
+    if (eventedProps.loai == LOAI_XIN_NGHI) {
+        ten = 'Xin nghỉ';
+        if (eventedProps.trangthai == STATUS_XIN_NGHI) {
+            classe = 'dark';
+        } else if (eventedProps.trangthai == STATUS_ACCEPT_XIN_NGHI) {
+            classe = 'info';
+        }
+    }
+
+    return {
+        ten: ten,
+        classe: classe
+    }
+}
+
+function getNhanSuNotAsync(id) {
+    var nhansu = $.ajax({
+        url: url_getNhanSu + '/' + id,
         type: "GET",
         async: false,
-        success:function(data)
+        success:function(response)
         {
-            console.log(data);
+            if (response.success) {
+                return response.nhansu;
+            } else {
+                sweetAlert(type_error, response.titleMess, response.textMess, null, notRevert);
+            }
+        }
+    });
+
+    return nhansu.responseJSON.nhansu;
+}
+
+function getInfoNhanSu(info, idns) {
+    $.ajax({
+        url: url_getNhanSu + '/' + idns,
+        type: "GET",
+        success:function(response)
+        {
+            if (response.success) {
+                let nhansu = response.nhansu;
+
+                var html = viewHTML(info, nhansu);
+                Swal.fire({
+                    title: 'Thông Tin Lịch Hẹn',
+                    html: html,
+                    customClass: {
+                        popup: 'swalert-w800',
+                    },
+                    showConfirmButton: false,
+                });
+
+            } else {
+                sweetAlert(type_error, response.titleMess, response.textMess, null, notRevert);
+            }
         }
     });
 }
@@ -558,6 +626,38 @@ function subUpdateSuKien(idSukien, idUserAction, title, mota, loai) {
     })
 }
 
+function updateTrangThaiXinNghi(idSukien, nhanSu, trangThai, start) {
+    if (nhanSuLogin.role == ROLE_ADMIN) {
+        subTrangThai(idSukien, nhanSu, trangThai, start);
+    } else {
+        sweetAlert(type_error, title_error, text_error_permision, info, revert);
+    }
+
+}
+
+function subTrangThai(idSukien, nhanSu, trangThai, start) {
+    $.ajax({
+        url: url_sukien_action,
+        type:"POST",
+        data:{
+            trangThai: trangThai,
+            id: idSukien,
+            idns: nhanSu.id,
+            start: start,
+            type: 'updateTrangThaiXinNghi'
+        },
+        success:function(response)
+        {
+            if (response.success) {
+                calendar.refetchEvents();
+                sweetAlert(type_success, response.titleMess, response.textMess, null, notRevert);
+            } else {
+                sweetAlert(type_error, response.titleMess, response.textMess, null, notRevert);
+            }
+        }
+    })
+}
+
 function alertResult(data) {
     if (data.success) {
         calendar.refetchEvents()
@@ -594,121 +694,4 @@ function sweetAlert(icon, title, text, info, revert) {
         }
     });
 }
-
-$(function() {
-
-
-
-    // var calendar = $('#calendar123').fullCalendar({
-    //     editable:true,
-    //     header: {
-    //         left:'prev,next today',
-    //         center:'title',
-    //         right:'month,agendaWeek,agendaDay'
-    //     },
-    //     events: url_sukien,
-    //     selectable: true,
-    //     selectHelper: true,
-    //     // select: async function(start, end, allDay)
-    //     // {
-    //     //     var start_ = moment(start).format("YYYY-MM-DD HH:mm:ss");
-    //     //     var end_ = moment(end).format("YYYY-MM-DD HH:mm:ss");
-
-    //     //     var today = moment(new Date()).format("YYYY-MM-DD");
-    //     //     var start_format_date = moment(start).format("YYYY-MM-DD");
-
-    //     //     if (start_format_date >= today) {
-    //     //         const { value: thongTinLichHen } = await Swal.fire({
-    //     //             title: 'Thông Tin Lịch Hẹn',
-    //     //             html: formSelectHTML(),
-    //     //             focusConfirm: false,
-    //     //             showCancelButton: true,
-    //     //             cancelButtonColor: '#d33',
-    //     //             cancelButtonText: 'Hủy',
-    //     //             showConfirmButton: true,
-    //     //             confirmButtonColor: '#3085d6',
-    //     //             confirmButtonText: 'Gửi',
-    //     //             preConfirm: () => {
-    //     //                 return {
-    //     //                     "title": document.getElementById('title').value,
-    //     //                     "mota": document.getElementById('mota').value,
-    //     //                     "loai": document.getElementById('loai').value
-    //     //                 }
-    //     //             }
-    //     //         });
-
-    //     //         if (thongTinLichHen) {
-    //     //             let valiError = validSelect(thongTinLichHen);
-
-    //     //             if (!valiError.check) { addNewSuKien(thongTinLichHen, start_, end_); }
-    //     //             else {
-    //     //                 Swal.fire({
-    //     //                     icon: 'error',
-    //     //                     title: 'Đã xảy ra lỗi !',
-    //     //                     text: valiError.mess,
-    //     //                 });
-    //     //             }
-    //     //         }
-    //     //     } else {
-    //     //         Swal.fire({
-    //     //             icon: 'error',
-    //     //             title: 'Đã xảy ra lỗi !',
-    //     //             text: 'Vui lòng chọn trước ngày hiện tại một ngày',
-    //     //         });
-    //     //     }
-    //     // },
-    //     // editable:true,
-    //     // eventResize: function(event, delta)
-    //     // {
-
-    //     // },
-    //     // eventDrop: function(event, delta)
-    //     // {
-    //     //     var start = moment(event.start).format("YYYY-MM-DD HH:mm:ss");
-    //     //     var end = moment(event.end).format("YYYY-MM-DD HH:mm:ss");
-    //     //     var title = event.title;
-    //     //     var id = event.id;
-
-    //     //     $.ajax({
-    //     //         url: url_sukien_action,
-    //     //         type:"POST",
-    //     //         data:{
-    //     //             title: title,
-    //     //             start: start,
-    //     //             end: end,
-    //     //             id: id,
-    //     //             type: 'update'
-    //     //         },
-    //     //         success:function(response)
-    //     //         {
-    //     //             calendar_sukien.fullCalendar('refetchEvents');
-    //     //             alert("Event Updated Successfully");
-    //     //         }
-    //     //     })
-    //     // },
-
-    //     // eventClick:function(event)
-    //     // {
-    //     //     if(confirm("Are you sure you want to remove it?"))
-    //     //     {
-    //     //         var id = event.id;
-    //     //         $.ajax({
-    //     //             url: url_sukien_action,
-    //     //             type:"POST",
-    //     //             data:{
-    //     //                 id:id,
-    //     //                 type:"delete"
-    //     //             },
-    //     //             success:function(response)
-    //     //             {
-    //     //                 calendar_sukien.fullCalendar('refetchEvents');
-    //     //                 alert("Event Deleted Successfully");
-    //     //             }
-    //     //         })
-    //     //     }
-    //     // }
-    // });
-});
-
-
 

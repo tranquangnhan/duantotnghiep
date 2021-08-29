@@ -18,7 +18,7 @@ class chenNhanSu extends Seeder
             ['name'=>'Nhân', 'email'=>'tranquangnhan1606@gmail.com','namsinh'=> 2000,'gioitinh'=> 1, 'img'=>'nhan.jpg','role'=> 1,'iddv'=> 1, 'danhgia'=>'5','password'=> '$2y$10$Pmr.7sQX/HnGhwq8ZzlOPuZ9P.yBZ1XSxoRINN4arsLVGR6.6lxf6','chucvu'=> 'giám đốc','luong'=> 1000000000,'remember_token'=> 'JeiM3160NnkNkOtcgeiglDnM9XBo6iEhsMkfni3DM4pfJbrGOn5zqs4gTfUI','created_at'=> '2021-08-16 20:56:18','updated_at'=> NULL],
             ['name'=>'Long Đẹp Trai', 'email'=>'longnh.2401@gmail.com','namsinh'=> 2001,'gioitinh'=> 1, 'img'=>'avt.jpg','role'=> 1,'iddv'=> 1, 'danhgia'=>'5','password'=> bcrypt('123123123'),'chucvu'=> 'giám đốc','luong'=> 1000000000,'remember_token'=> 'hJ5bPBxgp9UsxQhEyS0BNTSmUTkaEz40lZ2evGmzsa6ZIQSYTSRxto1RejYq','created_at'=> '2021-08-16 20:56:18','updated_at'=> NULL],
             ['name'=>'Tuong', 'email'=>'tuong2712@gmail.com','namsinh'=> 2001,'gioitinh'=> 1, 'img'=>'avt.jpg','role'=> 1,'iddv'=> 1, 'danhgia'=>'5','password'=> '$2y$10$nlRY7DRJfQQLSbI0aV7h9usw0waQxL9uGbNFQChi.06.YIigQCC3q','chucvu'=> 'giám đốc','luong'=> 1000000000,'remember_token'=> 'hJ5bPBxgp9UsxQhEyS0BNTSmUTkaEz40lZ2evGmzsa6ZIQSYTSRxto1RejYq','created_at'=> '2021-08-16 20:56:18','updated_at'=> NULL],
-
+            ['name'=>'Nhân Viên', 'email'=>'nhanvien@gmail.com','namsinh'=> 2001,'gioitinh'=> 1, 'img'=>'avt.jpg','role'=> 1,'iddv'=> 1, 'danhgia'=>'5','password'=> bcrypt('123123123'),'chucvu'=> 'Nhân viên','luong'=> 1000000000,'remember_token'=> 'hJ5bPBxgp9UsxQhEyS0BNTSmUTkaEz40lZ2evGmzsa6ZIQSYTSRxto1RejYq','created_at'=> '2021-08-16 20:56:18','updated_at'=> NULL],
         ]);
 
     }
