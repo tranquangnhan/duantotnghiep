@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-$today = date("Y-m-d");
+use DB;
 
 class them_chamcong extends Seeder
 {
