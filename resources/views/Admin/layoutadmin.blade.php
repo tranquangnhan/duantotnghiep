@@ -340,6 +340,16 @@
                             <li><a href="{{url('/quantri')}}">Danh sách</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="mdi mdi-page-layout-sidebar-left"></i>
+                            <span> Đơn Hàng</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{url('quantri/donhang')}}">Danh sách</a></li>
+                        </ul>
+                    </li>
 
 
                 </ul>
