@@ -106,10 +106,10 @@ class SuKienContronller extends Controller
         $sukien = SuKienModel::find($id)->update([
             'title' => $request->title,
             'mota' => $request->mota,
-            'start' => $request->start,
-            'end' => $request->end,
+            // 'start' => $request->start,
+            // 'end' => $request->end,
             'loai' => $request->loai,
-            'trangthai' => $request->trangthai,
+            // 'trangthai' => $request->trangthai,
         ]);
 
         $message = 'Cập nhật sự kiện thành công';
@@ -132,7 +132,34 @@ class SuKienContronller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sukien = SuKienModel::find($id);
+
+        if ($sukien == null) {
+            $response = Array(
+                'success' => false,
+                'titleMess' => 'Đã xảy ra lỗi !',
+                'textMess' => 'Không tìm thấy sự kiện',
+                'sukien' => $sukien,
+            );
+        } else {
+            $message = '';
+            if ($sukien->loai == Controller::LOAI_SUKIEN) {
+                $message = 'Sự kiện đã xóa thành công :)';
+            } else if ($sukien->loai == Controller::LOAI_XIN_NGHI) {
+                $message = 'Lịch nghỉ đã xóa thành công :)';
+            }
+
+
+            $sukien->delete();
+            $response = Array(
+                'success' => true,
+                'titleMess' => 'Thành công !',
+                'textMess' => $message,
+                'sukien' => $sukien,
+            );
+        }
+
+        return $response;
     }
 
         //return 132;
@@ -142,8 +169,8 @@ class SuKienContronller extends Controller
     public function getSukien(Request $request)
     {
         $data = SuKienModel::whereDate('start', '>=', $request->start)
-                       ->whereDate('end',   '<=', $request->end)
-                       ->get(['id', 'title', 'start', 'end', 'mota', 'loai', 'trangthai']);
+        ->whereDate('end', '<=', $request->end)
+        ->get(['id', 'idns', 'title', 'start', 'end', 'mota', 'loai', 'trangthai']);
 
         return response()->json($data);
     }
@@ -184,7 +211,16 @@ class SuKienContronller extends Controller
                 }
 
                 if ($request->type == 'resize') {
-                    $response = $this->resize($request);
+                    $idns = auth()->user()->id;
+                    if ($request->idns == $idns) {
+                        $response = $this->resize($request);
+                    } else {
+                        $response = Array(
+                            'success' => false,
+                            'titleMess' => 'Đã xảy ra lỗi !',
+                            'textMess' => 'Bạn không có quyền sửa'
+                        );
+                    }
                     return response()->json($response);
                 }
 
@@ -197,30 +233,48 @@ class SuKienContronller extends Controller
                         $titleMess = 'Đã xảy ra lỗi !';
                         $textMess = 'Tiêu đề không được rống.';
                     }
-                    // check date
-                    $today = date('Y-m-d');
-                    $start = date("Y-m-d", strtotime($request->start));
-                    if ($start < $today) {
+
+                    // check đúng user
+                    $idns = auth()->user()->id;
+                    if (!$request->idns == $idns) {
                         $error = true;
                         $titleMess = 'Đã xảy ra lỗi !';
-                        $textMess = 'Vui lòng chọn trước ngày hiện tại một ngày';
+                        $textMess = 'Bạn không có quyền sửa.';
                     }
 
-                    // if ($validError == false) {
-                    //     $response = $this->update($request, $request->id);
-                    // } else {
-                    //     $response = Array(
-                    //         'success' => false,
-                    //         'message' => $error_mess,
-                    //     );
-                    // }
-                    // return response()->json($response);
+                    if ($error == false) {
+                        $response = $this->update($request, $request->id);
+                    } else {
+                        $response = Array(
+                            'success' => false,
+                            'titleMess' => $titleMess,
+                            'textMess' => $textMess
+                        );
+                    }
+                    return response()->json($response);
                 }
 
                 if($request->type == 'delete')
                 {
-                    $sukien = SuKienModel::find($request->id)->delete();
-                    return response()->json($sukien);
+                    $error = false;
+                    $idns = auth()->user()->id;
+                    if (!$request->idns == $idns) {
+                        $error = true;
+                        $titleMess = 'Đã xảy ra lỗi !';
+                        $textMess = 'Bạn không có quyền sửa.';
+                    }
+
+                    if ($error == false) {
+                        $response = $this->destroy($request->id);
+                    } else {
+                        $response = Array(
+                            'success' => false,
+                            'titleMess' => $titleMess,
+                            'textMess' => $textMess
+                        );
+                    }
+
+                    return response()->json($response);
                 }
             }
         } catch (\Exception $e) {
@@ -230,7 +284,6 @@ class SuKienContronller extends Controller
                 'textMess' => $e->getMessage()
             ]);
         }
-
     }
 
     public function resize(Request $request) {

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditTableChamcong extends Migration
+class TaoTablecoso extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class EditTableChamcong extends Migration
      */
     public function up()
     {
-        Schema::table('chamcong', function (Blueprint $table) {
-            $table->integer('checkout')->nullable()->change();
-            $table->date('ngay')->change();
+        Schema::create('coso', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name',255);
+            $table->integer('tinh');
+            $table->integer('quanhuyen');
+            $table->integer('diachi');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +30,6 @@ class EditTableChamcong extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('coso');
     }
 }

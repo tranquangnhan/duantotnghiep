@@ -25,7 +25,7 @@ class CreateTableNhanSu extends Migration
             $table->text('danhgia');
             $table->string('password');
             $table->string('chucvu');
-            $table->double('luong',10,0)->default(0);
+            $table->double('luong',8,0);
             $table->string('remember_token',100);
             $table->timestamps();
         });
