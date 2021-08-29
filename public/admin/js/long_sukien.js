@@ -287,7 +287,7 @@ function viewHTML(info) {
                 <h5 class="m-0"><b>Xin nghỉ ngày 28/9/2001</b></h5>
                 <h6  class="my-1"><span  style="text-decoration: underline;">Xin nghi</span> <span class="badge bg-dark">Chưa cấp phép</span> </h6>
                 <p>Vào hôm 28/9 em có lịch học 2 buổi sáng và chiều, em xin phép được nghỉ vào 2 hôm đó</p>
-                <button class="btn btn-primary">Cấp phép</button>
+                <button class="btn btn-primary waves-effect width-md waves-light">Cấp phép</button>
             </div>
         </div>
 
@@ -297,7 +297,7 @@ function viewHTML(info) {
     return html;
 }
 
-function getInfoNhanSu(idns) {  
+function getInfoNhanSu(idns) {
     $.ajax({
         url: '',
         type: "GET",
