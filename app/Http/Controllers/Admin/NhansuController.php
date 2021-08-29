@@ -155,4 +155,8 @@ class NhansuController extends Controller
             return redirect('/quantri/nhansu')->with('thatbai', 'Xóa thất bại');
         }
     }
+
+    public function getNhanSu($id) {
+
+    }
 }
