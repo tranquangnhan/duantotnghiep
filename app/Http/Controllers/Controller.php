@@ -18,4 +18,11 @@ class Controller extends BaseController
     const CHAMCONG_OFF_ACCEPT = 2;
     const TIME_CAN_DELETE_CHAMCONG = 30; // MINUTES
 
+    public function moveIMG($name, $tmp)
+    {
+        $target_dir = 'admin/images/users/';
+        $target_file = $target_dir . $name;
+        move_uploaded_file($tmp, $target_file);
+    }
+
 }

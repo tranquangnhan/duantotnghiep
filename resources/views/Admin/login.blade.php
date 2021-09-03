@@ -22,7 +22,7 @@
 
 
 <body class="authentication-bg">
-<?php if (isset(Auth::user()->name)) echo Auth::user()->name;?>
+<?php var_dump(bcrypt('123456'));?>
 <div class="account-pages mt-5 mb-5">
     <div class="container">
         <div class="row justify-content-center">

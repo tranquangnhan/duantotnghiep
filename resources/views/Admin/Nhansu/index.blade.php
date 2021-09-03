@@ -8,7 +8,7 @@
             <div class="container">
                 <a href="{{route('nhansu.create')}}" class="btn btn-success">Thêm nhân sự</a>
                 <table class="table mb-0 table-bordered table-hover" id="table_product">
-                    <thead class="thead-light">
+                    <thead class="thead-light text-center">
                     <tr>
                         <th width="5px">STT</th>
                         <th width="25%">Thông tin</th>
@@ -32,7 +32,11 @@
                                 <strong>Giới tính:</strong> <?php echo ($row->gioitinh == 0) ? "Nam" : "Nữ";?>
                             </td>
                             <td width="15%" class="text-center">
-                                <img class="" width="90" src="{{asset("admin/images/users")}}{{'/'.$row->img}}">
+                                <?php $img= explode(",", $row->img);
+                                ?>
+                                @foreach($img as $idAnh => $Anh)
+                                        <img class="mb-2" width="90" src="{{asset("admin/images/users")}}{{'/'.$Anh}}">
+                                    @endforeach
                             </td>
                             <td>
                                 <?php echo ($row->role == 1) ? "ADMIN" : "Nhân viên";?>

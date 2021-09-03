@@ -38,7 +38,7 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::get('/xinnghi', [ChamCongController::class, 'viewXinNghi']);
 
     Route::resource('nhansu', NhansuController::class);
-    Route::post('nhansu/{id}', [NhansuController::class, 'update']);
+
 
     Route::resource('coso', CosoController::class);
     Route::get('/delivery', [CosoController::class,'create']);

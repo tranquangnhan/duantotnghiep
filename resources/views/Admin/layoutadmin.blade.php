@@ -9,7 +9,7 @@
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="admin/images/favicon.ico">
+        <link rel="shortcut icon" href="{{asset('admin/images/favicon.ico')}}">
 
         <!-- Bootstrap Css -->
         <link href="{{ asset('admin/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
@@ -542,7 +542,7 @@
     <script src="{{ asset('admin/js') }}/SweetAlert2.js"></script>
     <!-- end sweet alert -->
     <script src="{{ asset('admin/js') }}/home.js"></script>
-    <script src="../lib/ckeditor/ckeditor.js"></script>
+{{--    <script src="../lib/ckeditor/ckeditor.js"></script>--}}
     <script src="{{ asset('admin/js') }}/ckfinder.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"> </script>
     <script src="{{ asset('admin/js') }}/validate.js"></script>
