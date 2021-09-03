@@ -17,6 +17,11 @@ class Controller extends BaseController
     const CHAMCONG_ON = 1;
     const CHAMCONG_OFF_ACCEPT = 2;
     const TIME_CAN_DELETE_CHAMCONG = 30; // MINUTES
+    const LOAI_SUKIEN = 0;
+    const LOAI_XIN_NGHI = 1;
+    const STATUS_SUKIEN = 0;
+    const STATUS_XIN_NGHI = 1;
+    const STATUS_ACCEPT_XIN_NGHI = 2;
 
     public function moveIMG($name, $tmp)
     {
@@ -24,5 +29,4 @@ class Controller extends BaseController
         $target_file = $target_dir . $name;
         move_uploaded_file($tmp, $target_file);
     }
-
 }

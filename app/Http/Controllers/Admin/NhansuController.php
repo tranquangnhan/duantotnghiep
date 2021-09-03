@@ -195,4 +195,33 @@ class NhansuController extends Controller
             return redirect('/quantri/nhansu')->with('thatbai', 'Xóa thất bại');
         }
     }
+
+    public function LongGetNhanSu(Request $request, $id) {
+        try {
+            if ($request->ajax())
+            {
+                $nhansu = $this->nhansu->getDetailNhanSu($id);
+
+                if ($nhansu == null) {
+                    $response = Array(
+                        'success'    => false,
+                        'titleMess'  => 'Đã xảy ra lỗi !',
+                        'textMess'   => 'Không tìm thấy nhân sự :(',
+                    );
+                } else {
+                    $response = Array(
+                        'success'  => true,
+                        'nhansu'   => $nhansu,
+                    );
+                }
+                return response()->json($response);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success'    => false,
+                'titleMess'  => 'Đã xảy ra lỗi !',
+                'textMess'   => $e->getMessage()
+            ]);
+        }
+    }
 }

@@ -4225,7 +4225,7 @@ img.thumb {
 * A jQuery menu plugin
 * @version 3.0.6
 * @author Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
-* @license: MIT 
+* @license: MIT
 */
 
 .metismenu .arrow {
@@ -4376,10 +4376,10 @@ img.thumb {
 
 /*!
  * Waves v0.7.6
- * http://fian.my.id/Waves 
- * 
- * Copyright 2014-2018 Alfiana E. Sibuea and other contributors 
- * Released under the MIT license 
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014-2018 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE */
 
 .waves-effect {
@@ -6298,4 +6298,13 @@ a#cke_Upload_463 {
 }
 .border-error{
     border: 1px solid red !important;
+}
+
+/* Long */
+.swal2-popup.swal2-modal.swalert-w800.swal2-show {
+    width: 800px;
+}
+
+.swal2-title {
+    color: black !important;
 }

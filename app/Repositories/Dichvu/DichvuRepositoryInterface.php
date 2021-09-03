@@ -8,5 +8,6 @@ use App\Repositories\RepositoryInterface;
 
 interface DichvuRepositoryInterface extends RepositoryInterface
 {
-public function getDichvu();
+public function getDichVu();
+public function editDichvu($id);
 }
