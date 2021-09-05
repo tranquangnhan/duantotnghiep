@@ -2,6 +2,10 @@
 @extends('Admin/layoutadmin')
 @section('content')
 <style>
+    #imageA img{
+        width: 30%;
+        margin-left: 5px;
+    }
     .wrapper {
 
         width: 45%;
@@ -90,19 +94,20 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="">Danh mục</label><span style="color:red;"> (*)</span>
-                                            <select class="form-control" name="danhmuc">
-                                                @foreach($data as $dm)
-                                                    <option value="{{$dm->id}}">{{$dm->tendm}}</option>
+                                               <select class="form-control" name="danhmuc">
+                                                @foreach($DanhMuc as $id => $dmkh)
+                                                    <option
+                                                        value="{{$dmkh->id}}" <?php if ($data[0]['iddm'] == $dmkh->id) echo 'selected';?>>{{$dmkh->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <label for="formFile" class="form-label">Tải ảnh dịch vụ</label> <br>
                                                     <div class="wrapper">
                                                         <div class="file-upload">
-                                                            <input type="file" id="files" name="urlHinh"/>
+                                                            <input type="file" id="files" name="urlHinh[]" multiple>
                                                             <i class="fa fa-arrow-up" ></i>
                                                         </div>
                                                     </div>
@@ -110,8 +115,8 @@
                                                     <span class="badge bg-danger text-white">{{ $message }}</span>
                                                     @enderror
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <img id="image" width="45%"/>
+                                                <div class="col-md-8">
+                                                    <div id="imageA"></div>
                                                 </div>
                                             </div>
 
@@ -156,15 +161,24 @@
     </div>
     <script>
         document.getElementById("files").onchange = function () {
-            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                // get loaded data and render thumbnail.
-                document.getElementById("image").src = e.target.result;
-            };
+            var ListImages =document.getElementById("files").files;
+            if (ListImages.length>0){
+                for (let i=0; i< ListImages.length ; i++ ){
+                    var filetoload = ListImages[i];
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var srcData= e.target.result;
+                        var newIMG=document.createElement('img');
+                        newIMG.src=srcData;
+                        document.getElementById("imageA").innerHTML += newIMG.outerHTML;
+                    };
+                    //
+                    // // read the image file as a data URL.
+                    reader.readAsDataURL(filetoload);
+                }
+            }
 
-            // read the image file as a data URL.
-            reader.readAsDataURL(this.files[0]);
         };
     </script>
 @endsection

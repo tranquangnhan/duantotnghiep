@@ -1,61 +1,66 @@
 @extends('Admin/layoutadmin')
 @section('content')
-    <style>
-        .wrapper {
+<style>
+    #imageA img{
+        width: 30%;
+        margin-left: 5px;
+    }
+    .wrapper {
 
-            width: 45%;
-            height: 45%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        width: 45%;
+        height: 45%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .wrapper i {
-            font-size: 25pt;
-        }
+    .wrapper i {
+        font-size: 25pt;
+    }
 
-        .file-upload {
+    .file-upload {
 
-            height: 60px;
-            width: 60px;
-            border-radius: 100px;
-            position: relative;
+        height: 60px;
+        width: 60px;
+        border-radius: 100px;
+        position: relative;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-            border: 4px solid #FFFFFF;
-            overflow: hidden;
-            background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
-            background-size: 100% 200%;
-            transition: all 1s;
-            color: #FFFFFF;
-            font-size: 100px;
-        }
+        border: 4px solid #FFFFFF;
+        overflow: hidden;
+        background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
+        background-size: 100% 200%;
+        transition: all 1s;
+        color: #FFFFFF;
+        font-size: 100px;
+    }
 
-        input[type='file'] {
+    input[type='file'] {
 
-            height: 100px;
-            width: 100px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            cursor: pointer;
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
 
-        }
+    }
 
 
-        :hover {
+    :hover {
 
-            background-position: 0 -100%;
+        background-position: 0 -100%;
 
-            color: #2590EB;
+        color: #2590EB;
 
-        }
+    }
 
-    </style>
+</style>
+
     <div class="content-page">
         <div class="content">
 
@@ -101,9 +106,9 @@
                                         <div class="form-group">
                                             <label for="">Danh mục</label><span style="color:red;"> (*)</span>
                                             <select class="form-control" name="danhmuc">
-                                                @foreach($data as $dm)
+                                                @foreach($DanhMuc as $id => $dmkh)
                                                     <option
-                                                        value="{{$dm->id}}" <?php if ($data[0]['iddm'] == $dm->id) echo 'selected';?>>{{$dm->name}}</option>
+                                                        value="{{$dmkh->id}}" <?php if ($data[0]['iddm'] == $dmkh->id) echo 'selected';?>>{{$dmkh->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -114,21 +119,27 @@
                                                     <br>
                                                     <div class="wrapper">
                                                         <div class="file-upload">
-                                                            <input type="file" id="files" name="urlAnh"/>
+                                                            <input type="file" id="files" name="urlAnh[]" multiple>
                                                             <i class="fa fa-arrow-up"></i>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="img" value="{{$data[0]['img']}}">
                                                 <div class="col-md-6">
-                                                    <img id="image"
-                                                         src="{{asset('admin/images/dichvu')}}{{'/'.$data[0]['img']}}"
-                                                         width="45%"/>
+
+                                                    <?php
+                                                    $img= explode(",", $data[0]['img']);
+                                                    ?>
+
+                                                    @foreach($img as $idAnh => $Anh)
+                                                            <img class="imageS1"
+                                                                 src="{{asset('admin/images/dichvu')}}{{'/'.$Anh}}"
+                                                                 width="45%"/>
+                                                    @endforeach
+                                                        <div id="imageA"></div>
                                                 </div>
                                             </div>
-
                                         </div>
-
 
                                     </div>
                                     <div class="col-lg-12">
@@ -159,15 +170,28 @@
     </div>
     <script>
         document.getElementById("files").onchange = function () {
-            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                // get loaded data and render thumbnail.
-                document.getElementById("image").src = e.target.result;
-            };
+            var ListImages =document.getElementById("files").files;
+            if (ListImages.length>0){
+                for (let i=0; i< ListImages.length ; i++ ){
+                    var filetoload = ListImages[i];
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var srcData= e.target.result;
+                        var newIMG=document.createElement('img');
+                        newIMG.src=srcData;
+                        document.getElementById("imageA").innerHTML += newIMG.outerHTML;
 
-            // read the image file as a data URL.
-            reader.readAsDataURL(this.files[0]);
+                        var xx = document.querySelectorAll('.imageS1');
+                        for (i = 0; i < xx.length; i++) {
+                            xx[i].style.display = "none";
+                        }
+                    };
+                    //
+                    // // read the image file as a data URL.
+                    reader.readAsDataURL(filetoload);
+                }
+            }
         };
     </script>
 @endsection

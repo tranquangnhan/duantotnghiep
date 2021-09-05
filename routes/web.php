@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ChamCongController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DichvuController;
+use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NhansuController;
 use App\Http\Controllers\Admin\SuKienController;
@@ -35,7 +36,10 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::resource('danhmuc', DanhMucController::class);
 
     Route::resource('dichvu', DichvuController::class);
-    Route::post('dichvu/{id}', [DichvuController::class, 'update']);
+    // Route::post('dichvu/{id}', [DichvuController::class, 'update']);
+
+    Route::resource('khachhang', KhachHangController::class);
+    // Route::post('khachhang/{id}', [KhachHangController::class, 'update']);
 
     Route::resource('chamcong', ChamCongController::class);
     Route::group(['prefix' => 'chamcong'], function (){
