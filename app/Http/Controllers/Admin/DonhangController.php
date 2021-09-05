@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Donhang\DonhangRepository;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Str;
+
 class DonhangController extends Controller
 {
     private $Donhang;
@@ -69,7 +71,8 @@ class DonhangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data  = $this->Donhang->find($id);
+        return view('Admin.Donhang.edit',compact('data'));
     }
 
     /**
@@ -81,7 +84,27 @@ class DonhangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $validated = $request->validate([
+        //     'name' => 'required',
+        // ],[
+        //     'name.required'=>'Bạn chưa nhập tên danh mục',
+        // ]);
+
+        $data = [
+            'idkh'=> $request->idkh,
+            'idcs'=> $request->coso,
+            'nhanvien'=> $request->nhanvien,
+            'tongtien'=> $request->tongtien,
+            'magg'=> $request->magiamgia,
+            'tongtiengg'=> $request->tonggg,
+            'ghichu'=> $request->ghichu,
+
+
+        ];
+
+        $this->Donhang->update($id,$data);
+
+        return redirect('quantri/donhang')->with('success','Sửa thành công');
     }
 
     /**
@@ -92,6 +115,7 @@ class DonhangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->Donhang->delete($id);
+        return redirect('quantri/donhang')->with('success','Xoá thành công');
     }
 }

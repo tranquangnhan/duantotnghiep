@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class DonhangModel extends Model
 {
-    use HasFactory;
+    protected $table = 'donhang';
+    protected $primaryKey = 'iddh';
+    protected $fillable = [
+        'idkh',
+        'idcs',
+        'nhanvien',
+        'tongtien',
+        'magg',
+        'tongtiengg',
+        'ghichu'
+    ];
 }
