@@ -179,9 +179,14 @@ class ChamCongController extends Controller
     public function getDuLieuChoViecChamCong($list) {
         foreach ($list as $item) {
             // nhan su
-            $item->nhansu = $nhansu = NhansuModel::where('id', $item->idns)
+            $nhansu = $nhansu = NhansuModel::where('id', $item->idns)
             ->orderByDesc('id')
             ->first();
+
+            if ($nhansu != null) {
+                $item->nhansu = $nhansu;
+            }
+
 
             // trang thai
             if ($item->trangthai == 1)

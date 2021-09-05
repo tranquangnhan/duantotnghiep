@@ -7,9 +7,18 @@ use Illuminate\Http\Request;
 use App\Models\admin\SuKienModel;
 use DateTime;
 use Carbon\Carbon;
+use App\Repositories\Sukien\SukienRepositoryInterface;
+use Facade\FlareClient\Flare;
 
-class SuKienContronller extends Controller
+class SuKienController extends Controller
 {
+    protected $sukien;
+
+    public function __construct(SukienRepositoryInterface $sukien)
+    {
+        $this->sukien = $sukien;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -254,6 +263,36 @@ class SuKienContronller extends Controller
                     return response()->json($response);
                 }
 
+                if ($request->type == 'updateTrangThaiXinNghi') {
+                    $error = false;
+                    $roleUserLogin = auth()->user()->role;
+                    if (!$roleUserLogin == Controller::ROLE_ADMIN) {
+                        $error = true;
+                        $titleMess = 'Đã xảy ra lỗi !';
+                        $textMess = 'Chỉ quản lý mới được sửa.';
+                    }
+
+                    $today = date('Y-m-d');
+                    $start = date("Y-m-d", strtotime($request->start));
+                    if ($start < $today) {
+                        $error = true;
+                        $titleMess = 'Đã xảy ra lỗi !';
+                        $textMess = 'Không thể cập nhật lịch nghỉ đã qua';
+                    }
+
+                    if ($error == false) {
+                        $response = $this->updateTrangThaiXinNghi($request->id, $request->trangThai);
+                    } else {
+                        $response = Array(
+                            'success' => false,
+                            'titleMess' => $titleMess,
+                            'textMess' => $textMess
+                        );
+                    }
+
+                    return response()->json($response);
+                }
+
                 if($request->type == 'delete')
                 {
                     $error = false;
@@ -301,6 +340,26 @@ class SuKienContronller extends Controller
             'sukien' => $sukien,
             'request' => $request->end,
         );
+
+        return $response;
+    }
+
+    public function updateTrangThaiXinNghi($id, $trangThai) {
+        $sukien = $this->sukien->updateTrangThaiXinNghi($id, $trangThai);
+        if ($sukien) {
+            $response = Array(
+                'success' => true,
+                'titleMess' => 'Thành công !',
+                'textMess' => 'Lịch nghỉ đã được cập nhật :)',
+                'sukien' => $sukien
+            );
+        } else {
+            $response = Array(
+                'success' => false,
+                'titleMess' => 'Cập nhật thất bại !',
+                'textMess' => 'Đã xãy ra lỗi, vui lòng thử lại sau :('
+            );
+        }
 
         return $response;
     }
