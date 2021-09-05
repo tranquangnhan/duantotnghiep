@@ -42,8 +42,7 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::post('sukien/action', [SuKienContronller::class, 'action']);
 
     Route::resource('nhansu', NhansuController::class);
-    Route::post('nhansu/{id}', [NhansuController::class, 'update']);
-
+    
     Route::resource('coso', CosoController::class);
     Route::get('/delivery', [CosoController::class,'create']);
     Route::post('/select-dellivery', [CosoController::class,'select_dellivery']);
