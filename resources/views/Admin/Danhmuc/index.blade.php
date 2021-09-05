@@ -25,7 +25,7 @@
                                 <p>{{Session::get('error')}}</p>
                             </div>
                         @endif
-                        <table class="table mb-0" id="table_product">
+                        <table class="table mb-0 table-bordered" id="table_product">
                                 <thead class="thead-light">
                                     <tr>
                                         <th width="5px">STT</th>

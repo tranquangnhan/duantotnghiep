@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableDichVu extends Migration
+class CreateTableLichlamviec extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateTableDichVu extends Migration
      */
     public function up()
     {
-        Schema::create('dichvu', function (Blueprint $table) {
+        Schema::create('lich', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tendv',255);
-            $table->string('slug',255);
-            $table->string('img',255);
-            $table->integer('iddm');
-            $table->text('mota');
-            $table->double('gia',8,0);
-            $table->text('content');
+            $table->integer('idcoso');
+            $table->string('thu', 20);
+            $table->integer('soluongkhach');
+            $table->time('giobatdau');
+            $table->time('gioketthuc');
+            $table->boolean('type');
+            $table->string('ghichu', 100);
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateTableDichVu extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dichvu');
+        Schema::dropIfExists('lich');
     }
 }

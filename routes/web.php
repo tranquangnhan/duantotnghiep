@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NhansuController;
 use App\Http\Controllers\Admin\SuKienController;
 use App\Http\Controllers\Admin\CosoController;
+use App\Http\Controllers\Admin\LichlamviecController;
 use App\Models\admin\ChamCongModel;
 use Illuminate\Support\Facades\Route;
 
@@ -58,4 +59,6 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::post('/select-dellivery', [CosoController::class,'select_dellivery']);
     Route::post('/add-dellivery', [CosoController::class,'add_dellivery']);
     Route::post('/update', [CosoController::class,'update']);
+
+    Route::resource('/lichlamviec', LichlamviecController::class);
 });

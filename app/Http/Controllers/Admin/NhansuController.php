@@ -9,9 +9,6 @@ use App\Repositories\Dichvu\DichvuRepositoryInterface;
 use App\Repositories\Nhansu\NhansuRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use function GuzzleHttp\Promise\all;
-use Illuminate\Support\Facades\Validator;
 
 class NhansuController extends Controller
 {
