@@ -21,7 +21,7 @@ class CreateTableNhanSu extends Migration
             $table->boolean('gioitinh');
             $table->string('img',255);
             $table->unsignedTinyInteger('role')->default(0);
-            $table->integer('iddv')->default(0);
+            $table->integer('iddv');
             $table->text('danhgia');
             $table->string('password');
             $table->string('chucvu');

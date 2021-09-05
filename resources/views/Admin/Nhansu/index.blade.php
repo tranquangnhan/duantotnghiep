@@ -21,7 +21,6 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     @foreach ($data as $i=> $row)
                         <tr>
                             <td>{{$i+=1}}</td>
