@@ -11,7 +11,12 @@ const STATUS_XIN_NGHI = 1;
 const STATUS_ACCEPT_XIN_NGHI = 2;
 
 $(document).ready(function() {
-    $('#table_product').DataTable();
+    $('#table_product').DataTable({
+        "pageLength": 4
+    });
+    $('#table_pro').DataTable({
+
+    });
 });
 
 function submitForm() {

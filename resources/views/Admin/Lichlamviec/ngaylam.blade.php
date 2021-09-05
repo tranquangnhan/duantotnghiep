@@ -12,19 +12,9 @@
                     <div class="col-12">
                         <div class="card-box">
                             <h4 class="mt-0 header-title">Danh sách ngày làm cơ sở: <span class="btn btn-success">{{ucfirst($nameCs->name)}}</span></h4>
-                            <p class="text-muted font-14 mb-3">
-                                Ngày làm việc
-                            </p>
-                            @if (Session::has('success'))
-                                <div class="alert alert-success">
-                                    <p>{{Session::get('success')}}</p>
-                                </div>
-                            @elseif(Session::has('error'))
-                                <div class="alert alert-danger">
-                                    <p>{{Session::get('error')}}</p>
-                                </div>
-                            @endif
-                            <table class="table mb-0 table-bordered table-hover text-center" id="table_product">
+
+                            <a href="{{url("/quantri/lichlamviec")}}" class="btn btn-danger mb-2">Quay lại</a>
+                            <table class="table mb-0 table-bordered table-hover text-center" id="">
                                 <thead class="thead-light text-center">
                                 <tr>
                                     <th scope="col">STT</th>
@@ -34,29 +24,33 @@
                                     <th scope="col">Giờ kết thúc</th>
                                     <th scope="col">Nghỉ</th>
                                     <th scope="col">Ghi chú</th>
-                                    <th scope="col">Xem lịch làm</th>
+                                    <th scope="col">Cập nhật</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php $i = 0; ?>
                                 @foreach ($data as $row)
-                                    <?php $i++; ?>
+                               <form action="{{route('lichlamviec.update',$row->id)}}" method="post">
+                                   @csrf
+                                   {!! method_field('patch') !!}
                                     <tr>
-                                        <td>{{$i}}</td>
+                                        <input type="hidden" name="idcoso" value="{{$row->idcoso}}">
+
+                                        <td>{{$i+=1}}</td>
                                         <td class="">{{$row->thu}}</td>
-                                        <td class="" ><input type="number" name="soluongkh" value="{{$row->soluongkhach}}"></td>
+                                        <td class="" ><input type="number" name="soluongkh" min="1" max="150" value="{{$row->soluongkhach}}"></td>
                                         <td class=""><input type="time" id="appt" name="giobatdau"
-                                                            min="09:00" max="18:00" value="<?php echo $row->giobatdau;?>" required></td>
-                                        <td class=""><input type="time" id="appt" name="giobatdau"
-                                                            min="09:00" max="18:00" value="<?php echo $row->gioketthuc;?>" required></td>
-                                        <td class=""><input type="checkbox" name="type" <?php if ($row->type==1) echo "checked";?>></td>
+                                                            min="06:45" max="18:00" value="<?php echo date_format(date_create($row->giobatdau), "H:s");?>" required></td>
+                                        <td class=""><input type="time" id="appt" name="gioketthuc"
+                                                            min="09:00" max="18:00" value="<?php echo date_format(date_create($row->gioketthuc), "H:s");?>" required></td>
+                                        <td class=""><input type="checkbox" name="type"  <?php if ($row->type==1) echo "checked";?>></td>
                                         <td class=""><input type="text" name="ghichu" value="{{$row->ghichu}}"></td>
 
                                         <td>
-                                            <a href="{{route('lichlamviec.show',$row->id)}}" class="btn btn-success"
-                                               role="button"><i class="fa fa-eye"></i></a>
+                                            <button type="submit" name="capnhat" class="btn btn-danger"><i class="fa fa-refresh" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
+                               </form>
                                 @endforeach
                                 </tbody>
                             </table>
@@ -80,6 +74,30 @@
 
         </div> <!-- content -->
 
-
     </div>
+    @if (session('thanhcong'))
+        <script>
+            iziToast.success({
+                title: 'Thành công',
+                message: '<?php echo session('thanhcong');?>',
+                position: 'topRight',
+                backgroundColor:  'green',
+                titleColor: 'white',
+                messageColor: 'white',
+                iconColor: 'white',
+            });
+        </script>
+    @elseif(session('thatbai'))
+        <script>
+            iziToast.success({
+                title: 'Thất bại',
+                message: '<?php echo session('thatbai');?>',
+                position: 'topRight',
+                backgroundColor: 'orange',
+                titleColor: 'white',
+                messageColor: 'white',
+                iconColor: 'white',
+            });
+        </script>
+    @endif
 @endsection

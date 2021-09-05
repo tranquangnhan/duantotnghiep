@@ -23,9 +23,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
         <link href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css" rel="stylesheet" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     </head>
 
     <style>
@@ -453,6 +453,7 @@
     </a>
 
     <!-- Vendor js -->
+        <script src="{{ asset('admin/js') }}/home.js"></script>
     <script src="{{ asset('admin/js') }}/vendor.min.js"></script>
 
         <script type="text/javascript">
@@ -549,7 +550,7 @@
     <!-- sweet alert -->
     <script src="{{ asset('admin/js') }}/SweetAlert2.js"></script>
     <!-- end sweet alert -->
-    <script src="{{ asset('admin/js') }}/home.js"></script>
+
     <script src="{{ asset('admin/js') }}/ckfinder.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"> </script>
     <script src="{{ asset('admin/js') }}/validate.js"></script>

@@ -88,7 +88,7 @@ class NhansuController extends Controller
             $this->nhansu->create($ns);
             return redirect('/quantri/nhansu')->with('thanhcong', 'Thêm nhân sự thành công');
         } else {
-            return redirect('/quantri/nhansu')->with('thatbai', 'Thêm nhân sự thành công');
+            return redirect('/quantri/nhansu')->with('thatbai', 'Thêm nhân sự thất bại');
         }
     }
 

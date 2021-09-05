@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Lich;
 use App\Repositories\Coso\CosoRepositoryInterface;
 use App\Repositories\Lich\LichRepositoryInterface;
 use Illuminate\Http\Request;
@@ -81,9 +82,32 @@ class LichlamviecController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Lich $request, $id)
     {
-        //
+
+        $type=$request->type;
+        if ($type==null){
+            $type=0;
+        }
+        else{
+            $type=1;
+        }
+
+        if ($request->soluongkh>=1){
+            $lich=[
+                'soluongkhach'=>$request->soluongkh,
+                'giobatdau'=>$request->giobatdau,
+                'gioketthuc'=>$request->gioketthuc,
+                'type'=>$type,
+                'ghichu'=>$request->ghichu
+            ];
+            $this->lich->update($id, $lich);
+            echo 1;
+            return redirect(route('lichlamviec.show', $request->idcoso))->with('thanhcong', 'Sửa lịch làm thành công');
+        } else {
+            return redirect(route('lichlamviec.show', $request->idcoso))->with('thatbai', 'Sửa lịch làm thất bại');
+        }
+
     }
 
     /**
