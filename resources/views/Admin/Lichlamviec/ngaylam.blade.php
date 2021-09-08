@@ -20,8 +20,8 @@
                                     <th scope="col">STT</th>
                                     <th scope="col">Thứ</th>
                                     <th scope="col" >Số lượng KH</th>
-                                    <th scope="col">Giờ bắt đầu</th>
-                                    <th scope="col">Giờ kết thúc</th>
+                                    <th scope="col">Giờ bắt đầu (sáng)</th>
+                                    <th scope="col">Giờ kết thúc (chiều)</th>
                                     <th scope="col">Nghỉ</th>
                                     <th scope="col">Ghi chú</th>
                                     <th scope="col">Cập nhật</th>

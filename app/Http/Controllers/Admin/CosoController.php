@@ -98,8 +98,18 @@ class CosoController extends Controller
         $free->diachi = $data['wards'];
         $free->save();
 
+        /**
+         * Tưởng sửa lại phía trên phần lưu
+        *Create lịch
+         */
+//        $ThuNgay=['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
+//        for ($i=0; $i<7; $i++){
+//
+//        }
+//
 
-    }
+
+       }
 
     /**
      * Display the specified resource.
