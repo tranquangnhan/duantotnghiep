@@ -483,8 +483,8 @@ function getInfoNhanSu(info, idns) {
 }
 
 function editHTML(info) {
+    var mota = info.event.extendedProps.mota;
     const event = info.event;
-    const mota = info.event.extendedProps.mota;
     const idSukien = info.event.id;
     const idUserAction = info.event.extendedProps.idns;
     const loai = getLoaiSuKien(info.event.extendedProps.loai);
