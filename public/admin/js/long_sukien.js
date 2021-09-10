@@ -4,6 +4,8 @@ var danhSachSuKien = [
     {'ten': 'Meeting'}
 ]
 
+var loaiCanQuyenAdmin = [LOAI_SUKIEN, LOAI_MEETING];
+
 var url_sukien = '/quantri/sukien';
 var url_sukien_action = url_sukien + '/action';
 var url_fetch = '/quantri/getSuKien';
@@ -36,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,list'
         },
         events: {
             url: url_fetch,
@@ -46,50 +48,31 @@ document.addEventListener('DOMContentLoaded', function() {
             end: '2100-01-01' // hard coded goodness unfortunately
         },
         eventClick: function(info) {
-            var startFormatDate = moment(info.event.start).format("YYYY-MM-DD");
-            var data = checkTodate(info, startFormatDate);
-            if (data.isToDate) {
-                var start = moment(info.start).format("YYYY-MM-DD HH:mm:ss");
-                var end = moment(info.end).format("YYYY-MM-DD HH:mm:ss");
+            // var startFormatDate = moment(info.event.start).format("YYYY-MM-DD");
+            // var data = checkDate(info, startFormatDate);
+            // if (data.isToDate) {
 
-                getClickHTML(info);
 
-            } else {
-                sweetAlert(type_error, title_error, text_error_date, info, notRevert);
-            }
+            // } else {
+            //     sweetAlert(type_error, title_error, text_error_date, info, notRevert);
+            // }
+            // var start = moment(info.start).format("YYYY-MM-DD HH:mm:ss");
+            // var end = moment(info.end).format("YYYY-MM-DD HH:mm:ss");
+
+            getClickHTML(info);
         },
-        select: async function(info) {
+        select: function(info) {
             var startFormatDate = moment(info.start).format("YYYY-MM-DD");
-            var data = checkTodate(info, startFormatDate);
+            var data = checkDate(info, startFormatDate);
             if (data.isToDate) {
-                var start = moment(info.start).format("YYYY-MM-DD HH:mm:ss");
-                var end = moment(info.end).format("YYYY-MM-DD HH:mm:ss");
-                const { value: thongTinLichHen } = await Swal.fire({
+                Swal.fire({
                     title: 'Thông Tin Lịch Hẹn',
-                    html: formSelectHTML(),
-                    focusConfirm: false,
-                    showCancelButton: true,
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Hủy',
-                    showConfirmButton: true,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Gửi',
-                    preConfirm: () => {
-                        return {
-                            "title": document.getElementById('title').value,
-                            "mota": document.getElementById('mota').value,
-                            "loai": document.getElementById('loai').value
-                        }
-                    }
+                    html: formSelectHTML(info),
+                    customClass: {
+                        popup: 'swalert-w800',
+                    },
+                    showConfirmButton: false
                 });
-                if (thongTinLichHen)
-                {
-                    let valiError = validSelect(thongTinLichHen);
-                    if (!valiError.check) { addNewSuKien(thongTinLichHen, start, end); }
-                    else {
-                        sweetAlert(type_error, title_error, valiError.mess, info, notRevert);
-                    }
-                }
             } else {
                 sweetAlert(type_error, title_error, text_error_date, info, notRevert);
             }
@@ -99,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var idUserAction = info.event.extendedProps.idns;
             if (checkUser(idUserAction) === true) {
                 var startFormatDate = moment(info.event.start).format("YYYY-MM-DD");
-                var data = checkTodate(info, startFormatDate);
+                var data = checkDate(info, startFormatDate);
                 if (data.isToDate) {
                     var start = moment(info.event.start).format("YYYY-MM-DD HH:mm:ss");
                     var end = moment(info.event.end).format("YYYY-MM-DD HH:mm:ss");
@@ -144,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let idUserAction = info.event.extendedProps.idns;
             if (checkUser(idUserAction) === true) {
                 var startFormatDate = moment(info.event.start).format("YYYY-MM-DD");
-                var data = checkTodate(info, startFormatDate);
+                var data = checkDate(info, startFormatDate);
                 if (data.isToDate) {
                     var start = moment(info.event.start).format("YYYY-MM-DD HH:mm:ss");
                     var end = moment(info.event.end).format("YYYY-MM-DD HH:mm:ss");
@@ -189,13 +172,37 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 });
 
-function validSelect (data)
+function hideLabelError() {
+    var label = $('.error_');
+    label.hide();
+}
+
+function validSelect(data)
 {
+    hideLabelError();
     let check = false;
 
     if (data.title == '') {
-        var mess = 'Bạn chưa nhập tiêu đề';
         check = true;
+        var mess = 'Bạn chưa nhập tiêu đề';
+        var idErrorLabel = 'titleError';
+        showError(idErrorLabel, mess);
+    }
+
+	if (loaiCanQuyenAdmin.indexOf(parseInt(data.loai)) != -1) {
+        if (nhanSuLogin.role == ROLE_NHANVIEN) {
+            check = true;
+            var mess = "Bạn không có quyền tạo lịch hẹn loại này";
+            var idErrorLabel = 'loaiError';
+            showError(idErrorLabel, mess);
+        }
+	}
+
+    if (!checkFormatDateTime(data.start)) {
+        check = true;
+        var mess = "Thời gian phải theo format datetime <br> (0000-00-00 00:00:00)";
+        var idErrorLabel = 'startError';
+        showError(idErrorLabel, mess);
     }
 
     return {
@@ -204,42 +211,76 @@ function validSelect (data)
     }
 }
 
-function formSelectHTML()
-{
+function checkFormatDateTime(dateTime) {
+    var format = "YYYY-MM-DD HH:mm:ss";
+    return moment(dateTime, format, true).isValid();
+}
+
+function showError(id, mess) {
+    var id = $('#' + id);
+    id.html(mess);
+    id.show();
+}
+
+function formSelectHTML(info) {
+	const start = moment(info.start).format("YYYY-MM-DD HH:mm:ss");
+    const end = moment(info.end).format("YYYY-MM-DD HH:mm:ss");
     let html =
     `
     <div class="select-sukien text-left">
         <div class="form-group">
             <div class="row">
-                <div class="col-3">
+                <div class="col-12 p-0">
                     <label for="loai">Loại <span style="color: red;">(*)</span></label>
-                </div>
-                <div class="col-9">
                     <select class="form-control" id="loai">
                         <option value="0">Sự kiện</option>
                         <option value="1">Xin nghỉ</option>
                         <option value="2">Meeting</option>
                     </select>
+					<label class="error_" style="color: red;" id="loaiError"></label>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-3">
+                <div class="col-12 p-0">
                     <label for="">Tiêu Đề <span style="color: red;">(*)</span></label>
-                </div>
-                <div class="col-9">
                     <input type="text" class="form-control" id="title">
+					<label class="error_" style="color: red;" id="titleError"></label>
                 </div>
             </div>
         </div>
+
+
         <div class="form-group">
             <div class="row">
-                <div class="col-3">
+				<div class="col-6 pl-0">
+					<label for="start">Thời gian bắt đầu <span style="color: red;">(Date/time)</span></label>
+					<input type="text" class="form-control" value="${start}"  id="start" name="">
+					<label class="error_" style="color: red;" id="startError"></label>
+				</div>
+				<div class="col-6 pr-0">
+					<label for="end">Kết thúc</label>
+					<input type="text" class="form-control" value="${end}" id="end" name="">
+					<label class="error_" style="color: red;" id="endError"></label>
+				</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12 p-0">
                     <label for="">Mô tả</label>
+                    <textarea type="text" class="form-control" cols="10" rows="5" id="mota"></textarea>
                 </div>
-                <div class="col-9">
-                    <textarea type="text" class="form-control" id="mota"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12 p-0">
+                    <button class="btn btn-primary" onclick="luuLichHen(${JSON.stringify(info).split('"').join("&quot;")});">Lưu lịch</button>
+                    <button class="btn btn-danger" onclick="hideSweetalert();">Hủy</button>
                 </div>
             </div>
         </div>
@@ -247,6 +288,39 @@ function formSelectHTML()
     `;
 
     return html;
+}
+
+function luuLichHen(info) {
+	var start = $('#start').val();
+	var end = $('#end').val();
+
+    const thongTinLichHen = {
+        title: $('#title').val(),
+        mota: $('#mota').val(),
+        loai: $('#loai').val(),
+		start: start,
+		end: end
+    }
+
+    var error = false;
+    var errorMess = '';
+
+    var validate = validSelect(thongTinLichHen);
+    if (validate.check) {
+        error = true;
+        errorMess = validate.mess;
+    }
+
+    if (!error)
+    { addNewSuKien(thongTinLichHen, start, end); }
+    // else
+    // {
+    //     sweetAlert(type_error, title_error, errorMess, info, notRevert);
+    // }
+}
+
+function hideSweetalert() {
+    swal.close();
 }
 
 function getClickHTML(info) {
@@ -258,6 +332,7 @@ function getClickHTML(info) {
             html: html,
             customClass: {
                 content: 'content-class',
+                popup: 'swalert-w800',
             },
             showConfirmButton: false,
         });
@@ -267,13 +342,29 @@ function getClickHTML(info) {
     }
 }
 
+function checkStartBiggerTomorrow(start) {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowFormatDate = moment(tomorrow).format("YYYY-MM-DD");
+    const startFormatDate = moment(start).format("YYYY-MM-DD");
+
+    if (tomorrowFormatDate < startFormatDate) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function viewHTML(info, nhansu) {
-    var event = info.event;
-    var eventedProps = info.event.extendedProps;
-    var start = moment(event.start).format("HH:mm:ss DD-MM-YYYY");
-    var end = moment(event.end).format("HH:mm:ss DD-MM-YYYY");
-    var trangThaiSuKien = getTrangThaiSuKien(eventedProps);
+    const event = info.event;
+    const eventedProps = info.event.extendedProps;
+    const start = moment(event.start).format("HH:mm:ss DD-MM-YYYY");
+    const end = moment(event.end).format("HH:mm:ss DD-MM-YYYY");
+    const trangThaiSuKien = getTrangThaiSuKien(eventedProps);
+    const startBiggerTomorrow = checkStartBiggerTomorrow(event.start);
     if (eventedProps.mota == null) { eventedProps.mota = ''; }
+
     var html =
     `
     <div class="view-sukien text-left mt-2">
@@ -292,16 +383,30 @@ function viewHTML(info, nhansu) {
                 <p>${eventedProps.mota}</p> `;
             if (!eventedProps.loai == LOAI_SUKIEN) {
                 if (eventedProps.trangthai == STATUS_XIN_NGHI) {
-                    html +=
-                    `<button class="btn btn-primary float-right waves-effect width-md waves-light" onclick="updateTrangThaiXinNghi(`+event.id+`, `+nhansu.id+`, `+STATUS_ACCEPT_XIN_NGHI+`, '`+start+`');">
-                        Cấp phép
-                    </button>`;
+                    if (startBiggerTomorrow) {
+                        html +=
+                        `<button class="btn btn-primary float-right waves-effect width-md waves-light" onclick="updateTrangThaiXinNghi(`+event.id+`, `+nhansu.id+`, `+STATUS_ACCEPT_XIN_NGHI+`, '`+start+`');">
+                            Cấp phép
+                        </button>`;
+                    } else {
+                        html +=
+                        `<button class="btn btn-secondary float-right waves-effect width-md waves-light">
+                            Cấp phép
+                        </button>`;
+                    }
                 }
                 if (eventedProps.trangthai == STATUS_ACCEPT_XIN_NGHI) {
-                    html +=
-                    `<button class="btn btn-danger float-right waves-effect width-md waves-light" onclick="updateTrangThaiXinNghi(`+event.id+`, `+nhansu.id+`, `+STATUS_XIN_NGHI+`, '`+start+`');">
-                        Hủy cấp phép
-                    </button>`;
+                    if (startBiggerTomorrow) {
+                        html +=
+                        `<button class="btn btn-danger float-right waves-effect width-md waves-light" onclick="updateTrangThaiXinNghi(`+event.id+`, `+nhansu.id+`, `+STATUS_XIN_NGHI+`, '`+start+`');">
+                            Hủy cấp phép
+                        </button>`;
+                    } else {
+                        html +=
+                        `<button class="btn btn-secondary float-right waves-effect width-md waves-light">
+                            Hủy cấp phép
+                        </button>`;
+                    }
                 }
             }
     html += `</div>
@@ -378,10 +483,15 @@ function getInfoNhanSu(info, idns) {
 }
 
 function editHTML(info) {
-    var mota = info.event.extendedProps.mota;
-    var idSukien = info.event.id;
-    var idUserAction = info.event.extendedProps.idns;
-    var loai = getLoaiSuKien(info.event.extendedProps.loai);
+    const event = info.event;
+    const mota = info.event.extendedProps.mota;
+    const idSukien = info.event.id;
+    const idUserAction = info.event.extendedProps.idns;
+    const loai = getLoaiSuKien(info.event.extendedProps.loai);
+    const startBiggerTomorrow = checkStartBiggerTomorrow(event.start);
+    const start = moment(event.start).format("YYYY-MM-DD HH:mm:ss");
+    const end = moment(event.end).format("YYYY-MM-DD HH:mm:ss");
+
     if (mota == null) {
         mota = '';
     }
@@ -390,44 +500,63 @@ function editHTML(info) {
     <div class="select-sukien text-left">
         <div class="form-group">
             <div class="row">
-                <div class="col-3">
+                <div class="col-12 p-0">
                     <label for="loai">Loại <span style="color: red;">(*)</span></label>
-                </div>
-                <div class="col-9">
                     <select class="form-control" id="loai">
                         ${loai}
                     </select>
+                    <label class="error_" style="color: red;" id="loaiError"></label>
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-3">
-                    <label for="">Tiêu Đề <span style="color: red;">(*)</span></label>
-                </div>
-                <div class="col-9">
-                    <input type="text" class="form-control" value="${info.event.title}" id="title">
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-3">
-                    <label for="">Mô tả</label>
-                </div>
-                <div class="col-9">
-                    <textarea type="text" class="form-control" id="mota">${mota}</textarea>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-3">
 
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12 p-0">
+                    <label for="">Tiêu Đề <span style="color: red;">(*)</span></label>
+                    <input type="text" class="form-control" value="${info.event.title}" id="title">
+                    <label class="error_" style="color: red;" id="titleError"></label>
                 </div>
-                <div class="col-9">
-                    <button class="btn btn-primary" onclick="updateSuKien(`+idSukien+`, `+idUserAction+`);">Cập nhật</button>
-                    <button class="btn btn-danger" onclick="deleteSuKien(`+idSukien+`, `+idUserAction+`);">Xóa</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6 pl-0">
+                    <label for="start">Thời gian bắt đầu <span style="color: red;">(Date/time)</span></label>
+                    <input type="text" class="form-control" value="${start}"  id="start" name="">
+                    <label class="error_" style="color: red;" id="startError"></label>
+                </div>
+                <div class="col-6 pr-0">
+                    <label for="end">Kết thúc</label>
+                    <input type="text" class="form-control" value="${end}" id="end" name="">
+                    <label class="error_" style="color: red;" id="endError"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12 p-0">
+                    <label for="">Mô tả</label>
+                    <textarea type="text" class="form-control" cols="10" rows="5" id="mota">${mota}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12 p-0">`;
+                    if (startBiggerTomorrow) {
+                        html +=
+                        `<button class="btn btn-primary" onclick="updateSuKien(`+idSukien+`, `+idUserAction+`);">Cập nhật</button>
+                        <button class="btn btn-danger" onclick="deleteSuKien(`+idSukien+`, `+idUserAction+`);">Xóa</button>`;
+                    } else {
+                        html +=
+                        `<button class="btn btn-secondary">Cập nhật</button>
+                        <button class="btn btn-secondary">Xóa</button>`;
+                    }
+                    html += `
                 </div>
             </div>
         </div>
@@ -471,10 +600,9 @@ function addNewSuKien(thongTinLichHen, start, end)
     });
 }
 
-function checkTodate(info, startFormatDate)
+function checkDate(info, startFormatDate)
 {
     var today = moment(new Date()).format("YYYY-MM-DD");
-
     if (startFormatDate >= today) {
         var check = true;
     } else {
@@ -491,10 +619,20 @@ function updateSuKien(idSukien, idUserAction) {
         title: $('#title').val(),
         mota: $('#mota').val(),
         loai: $('#loai').val(),
+        start: $('#start').val(),
+        end: $('#end').val(),
     }
 
-    let valiError = validSelect(thongTinLichHen);
-    if (!valiError.check) {
+    var error = false;
+    var errorMess = '';
+    var validate = validSelect(thongTinLichHen);
+
+    if (validate.check) {
+        error = true;
+        errorMess = validate.mess;
+    }
+
+    if (!error) {
         const confirmUpdate = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success ml-3',
@@ -523,9 +661,10 @@ function updateSuKien(idSukien, idUserAction) {
             }
         });
     }
-    else {
-        sweetAlert(type_error, title_error, valiError.mess, null, notRevert);
-    }
+    // else {
+    //     const info = null;
+    //     sweetAlert(type_error, title_error, errorMess, info, notRevert);
+    // }
 }
 
 function deleteSuKien(idSukien, idUserAction) {
@@ -675,8 +814,8 @@ function alertResult(data) {
     }
 }
 
-function checkUser(id_us_action) {
-    if (id_us == id_us_action) {
+function checkUser(idUserAction) {
+    if (id_us == idUserAction) {
         return true;
     } else {
         return false;

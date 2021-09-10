@@ -181,6 +181,21 @@ class SuKienController extends Controller
         ->whereDate('end', '<=', $request->end)
         ->get(['id', 'idns', 'title', 'start', 'end', 'mota', 'loai', 'trangthai']);
 
+        foreach ($data as $row) {
+            if ($row->loai == Controller::LOAI_SUKIEN) {
+                $row->backgroundColor = '#F06292';
+                $row->borderColor = '#F06292';
+            }
+            else if ($row->loai == Controller::LOAI_XIN_NGHI) {
+                $row->backgroundColor = '#4bd396';
+                $row->borderColor = '#4bd396';
+            }
+            else if ($row->loai == Controller::LOAI_MEETING) {
+                $row->backgroundColor = '#ff9800';
+                $row->borderColor = '#ff9800';
+            }
+        }
+
         return response()->json($data);
     }
 
@@ -248,7 +263,7 @@ class SuKienController extends Controller
                     if (!$request->idns == $idns) {
                         $error = true;
                         $titleMess = 'Đã xảy ra lỗi !';
-                        $textMess = 'Bạn không có quyền sửa.';
+                        $textMess = 'Bạn không có quyền sửa lịch của người khác.';
                     }
 
                     if ($error == false) {
@@ -272,12 +287,13 @@ class SuKienController extends Controller
                         $textMess = 'Chỉ quản lý mới được sửa.';
                     }
 
-                    $today = date('Y-m-d');
+                    $tomorrow = new DateTime('tomorrow');
+                    $tomorrow = $tomorrow->format('Y-m-d');
                     $start = date("Y-m-d", strtotime($request->start));
-                    if ($start < $today) {
+                    if ($start < $tomorrow) {
                         $error = true;
                         $titleMess = 'Đã xảy ra lỗi !';
-                        $textMess = 'Không thể cập nhật lịch nghỉ đã qua';
+                        $textMess = 'Lịch nghỉ chỉ được cập nhật trước một ngày';
                     }
 
                     if ($error == false) {

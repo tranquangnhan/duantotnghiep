@@ -6308,3 +6308,11 @@ a#cke_Upload_463 {
 .swal2-title {
     color: black !important;
 }
+
+.fc-event {
+    text-align: left;
+}
+
+.error_ {
+    display: none;
+}

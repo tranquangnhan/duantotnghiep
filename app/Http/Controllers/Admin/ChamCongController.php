@@ -190,17 +190,17 @@ class ChamCongController extends Controller
 
 
             // trang thai
-            if ($item->trangthai == 1)
+            if ($item->trangthai == Controller::CHAMCONG_ON)
             {
                 $item->tenTrangThai = 'Đi làm';
                 $item->class = 'primary';
             }
-            else if ($item->trangthai == 2)
+            else if ($item->trangthai == Controller::CHAMCONG_OFF_ACCEPT)
             {
                 $item->tenTrangThai = 'Xin nghỉ/đã duyệt';
                 $item->class = 'primary';
             }
-            else if ($item->trangthai == 0)
+            else if ($item->trangthai == Controller::CHAMCONG_OFF)
             {
                 $item->tenTrangThai = 'Xin nghỉ/chưa duyệt';
                 $item->class = 'warning';

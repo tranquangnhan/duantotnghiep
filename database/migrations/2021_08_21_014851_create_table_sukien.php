@@ -16,7 +16,7 @@ class CreateTableSukien extends Migration
         Schema::create('sukien', function (Blueprint $table) {
             $table->id();
             $table->integer('idns');
-            $table->string('tieude', 255);
+            $table->string('title', 255);
             $table->text('mota')->nullable();
             $table->dateTime('start');
             $table->dateTime('end');
