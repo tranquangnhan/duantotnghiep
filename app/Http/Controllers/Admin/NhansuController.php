@@ -9,10 +9,6 @@ use App\Repositories\Dichvu\DichvuRepositoryInterface;
 use App\Repositories\Nhansu\NhansuRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-<<<<<<< HEAD
-
-=======
->>>>>>> 587bc45ce36a7d7dbf45286653402a0befdc216b
 
 class NhansuController extends Controller
 {
