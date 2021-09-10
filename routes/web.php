@@ -35,7 +35,7 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::resource('danhmuc', DanhMucController::class);
 
     Route::resource('dichvu', DichvuController::class);
-    Route::post('dichvu/{id}', [DichvuController::class, 'update']);
+    // Route::post('dichvu/{id}', [DichvuController::class, 'update']);
 
     Route::resource('chamcong', ChamCongController::class);
     Route::group(['prefix' => 'chamcong'], function (){
@@ -47,7 +47,6 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
 
 
     Route::resource('nhansu', NhansuController::class);
-    
     Route::post('nhansu/{id}', [NhansuController::class, 'update']);
     Route::get('getNhanSu/{id}', [NhansuController::class, 'LongGetNhanSu']);
 

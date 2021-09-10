@@ -29,7 +29,7 @@ class NhansuController extends Controller
      */
     public function index()
     {
-        $data = $this->nhansu->getNhansu();
+        $data = $this->nhansu->getAll();
         return view('Admin.Nhansu.index', compact('data'));
     }
 
