@@ -6,11 +6,13 @@ const CHAMCONG_OFF_ACCEPT = 2;
 const TIME_CAN_DELETE_CHAMCONG = 30; // MINUTES
 const LOAI_SUKIEN = 0;
 const LOAI_XIN_NGHI = 1;
+const LOAI_MEETING = 2;
 const STATUS_SUKIEN = 0;
 const STATUS_XIN_NGHI = 1;
 const STATUS_ACCEPT_XIN_NGHI = 2;
 
 $(document).ready(function() {
+<<<<<<< HEAD
     $('#table_product').DataTable(
         {
             "language": {
@@ -28,6 +30,14 @@ $(document).ready(function() {
             }
         }
     );
+=======
+    $('#table_product').DataTable({
+        "pageLength": 4
+    });
+    $('#table_pro').DataTable({
+
+    });
+>>>>>>> 587bc45ce36a7d7dbf45286653402a0befdc216b
 });
 
 function submitForm() {

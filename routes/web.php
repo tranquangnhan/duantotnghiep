@@ -3,10 +3,12 @@
 use App\Http\Controllers\Admin\ChamCongController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DichvuController;
+use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NhansuController;
 use App\Http\Controllers\Admin\SuKienController;
 use App\Http\Controllers\Admin\CosoController;
+use App\Http\Controllers\Admin\LichlamviecController;
 use App\Models\admin\ChamCongModel;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,9 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::resource('dichvu', DichvuController::class);
     // Route::post('dichvu/{id}', [DichvuController::class, 'update']);
 
+    Route::resource('khachhang', KhachHangController::class);
+    // Route::post('khachhang/{id}', [KhachHangController::class, 'update']);
+
     Route::resource('chamcong', ChamCongController::class);
     Route::group(['prefix' => 'chamcong'], function (){
         Route::get('/cuatoi/{id}', [ChamCongController::class, 'chamcongcuatoi']);
@@ -55,4 +60,6 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::post('/select-dellivery', [CosoController::class,'select_dellivery']);
     Route::post('/add-dellivery', [CosoController::class,'add_dellivery']);
     Route::post('/update', [CosoController::class,'update']);
+
+    Route::resource('/lichlamviec', LichlamviecController::class);
 });

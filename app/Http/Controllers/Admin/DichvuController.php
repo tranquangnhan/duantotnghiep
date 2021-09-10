@@ -10,7 +10,8 @@ use App\Repositories\Dichvu\DichvuRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use function GuzzleHttp\Promise\all;
+use Illuminate\Support\Facades\Validator;
 
 class DichvuController extends Controller
 {
@@ -31,7 +32,8 @@ class DichvuController extends Controller
     public function index()
     {
        $data= $this->dichvu->getAll();
-     return view('Admin.Dichvu.index',compact('data'));
+       $DanhMuc = $this->danhmuc->getAll();
+     return view('Admin.Dichvu.index',compact('data','DanhMuc'));
     }
 
     /**
@@ -42,7 +44,8 @@ class DichvuController extends Controller
     public function create()
     {
         $data=$this->dichvu->getAll();
-        return view('Admin.Dichvu.create', compact('data'));
+        $DanhMuc = $this->danhmuc->getAll();
+        return view('Admin.Dichvu.create', compact('data','DanhMuc'));
     }
 
     /**
@@ -53,6 +56,25 @@ class DichvuController extends Controller
      */
     public function store(Dichvu $request)
     {
+        $allowedfileExtension = ['jpg', 'png', 'gif'];
+        $imgAnh = "";
+        $files = $request->file('urlHinh');
+        foreach ($files as $id => $row) {
+            $extension = $row->getClientOriginalExtension();
+            $check = in_array($extension, $allowedfileExtension);
+            if (!$check) {
+                //bắt lỗi
+                echo "ảnh không hợp lệ";
+                break;
+            } else {
+                $imgAnh .= $_FILES["urlHinh"]["name"][$id] . ',';
+                $imgtmp = $_FILES["urlHinh"]["tmp_name"][$id];
+                $upImages = $_FILES["urlHinh"]["name"][$id];
+
+                $this->moveIMG($upImages, $imgtmp);
+            }
+        }
+        $imgHinh = rtrim($imgAnh, ',');
             $name = $request->name;
             $dv=[
                 'name'=>$request->name,
@@ -60,12 +82,10 @@ class DichvuController extends Controller
                 'gia'=>$request->gia,
                 'mota'=>$request->mota,
                 'iddm'=>$request->danhmuc,
-                'img'=>basename($_FILES["urlHinh"]["name"]),
+                'img'=>$imgHinh,
                 'content'=>$request->content
             ];
-            $target_dir    = 'admin/images/dichvu/';
-            $target_file   = $target_dir . basename($_FILES["urlHinh"]["name"]);
-            move_uploaded_file($_FILES["urlHinh"]["tmp_name"], $target_file);
+          
             $this->dichvu->create($dv);
             return redirect('/quantri/dichvu')->with('thanhcong', 'Thêm Dịch vụ thành công');
      
@@ -91,7 +111,8 @@ class DichvuController extends Controller
     public function edit($id)
     {
         $data=$this->dichvu->editDichVu($id);
-        return view('Admin.Dichvu.edit', compact('data'));
+        $DanhMuc = $this->danhmuc->getAll();
+        return view('Admin.Dichvu.edit', compact('data','DanhMuc'));
     }
 
     /**
@@ -101,26 +122,42 @@ class DichvuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Dichvu $request, $id)
     {
         $name = $request->name;
-        $urlHinh=basename($_FILES["urlAnh"]["name"]);
+        $urlHinh = $request->file('urlAnh');
+        $imgHinh = "";
 
-        if ($urlHinh==""){
-            $urlHinh=$request->img;
+        if ($urlHinh == null) {
+            $imgHinh .= $request->img;
+        } else {
+            $allowedfileExtension = ['jpg', 'png', 'gif'];
+            $imgAnh = "";
+            foreach ($urlHinh as $index => $row) {
+                $extension = $row->getClientOriginalExtension();
+                $check = in_array($extension, $allowedfileExtension);
+                if (!$check) {
+                    //bắt lỗi
+//                    echo  basename($_FILES["urlAnh"]["name"][$id]);
+                    echo "ảnh không hợp lệ";
+                    break;
+                } else {
+                    $imgAnh .= $_FILES["urlAnh"]["name"][$index] . ',';
+                    $imgtmp = $_FILES["urlAnh"]["tmp_name"][$index];
+                    $upImages = $_FILES["urlAnh"]["name"][$index];
+                    $this->moveIMG($upImages, $imgtmp);
+                }
+            }
+            $imgHinh .= rtrim($imgAnh, ',');
         }
-        else{
-            $target_dir    = 'admin/images/dichvu/';
-            $target_file   = $target_dir . basename($_FILES["urlAnh"]["name"]);
-            move_uploaded_file($_FILES["urlAnh"]["tmp_name"], $target_file);
-        }
+
         $dv=[
             'name'=>$request->name,
             'slug'=>strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name))),
             'gia'=>$request->gia,
             'mota'=>$request->mota,
             'iddm'=>$request->danhmuc,
-            'img'=>$urlHinh,
+            'img' => $imgHinh,
             'content'=>$request->content
         ];
 

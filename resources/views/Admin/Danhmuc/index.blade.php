@@ -24,6 +24,7 @@
                             <div class="alert alert-danger">
                                 <p>{{Session::get('error')}}</p>
                             </div>
+<<<<<<< HEAD
                         @endif 
                         <h5>Thêm Nhanh Danh Mục</h5>
                          <form data-parsley-validate action="{{route('danhmuc.store')}}" id="formadd" novalidate onsubmit="return submitForm()" method="post" enctype="multipart/form-data">
@@ -42,6 +43,10 @@
                          </form>
 
                         <table class="table mb-0" id="table_product">
+=======
+                        @endif
+                        <table class="table mb-0 table-bordered" id="table_product">
+>>>>>>> 587bc45ce36a7d7dbf45286653402a0befdc216b
                                 <thead class="thead-light">
                                     <tr>
                                         <th width="5px">STT</th>
