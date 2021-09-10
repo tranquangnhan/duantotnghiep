@@ -29,6 +29,6 @@ class Danhmuc extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('danhmuc');
     }
 }
