@@ -115,8 +115,8 @@ class SuKienController extends Controller
         $sukien = SuKienModel::find($id)->update([
             'title' => $request->title,
             'mota' => $request->mota,
-            // 'start' => $request->start,
-            // 'end' => $request->end,
+            'start' => $request->start,
+            'end' => $request->end,
             'loai' => $request->loai,
             // 'trangthai' => $request->trangthai,
         ]);

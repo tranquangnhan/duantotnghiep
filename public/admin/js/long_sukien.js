@@ -651,7 +651,7 @@ function updateSuKien(idSukien, idUserAction) {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                subUpdateSuKien(idSukien, idUserAction, thongTinLichHen.title, thongTinLichHen.mota, thongTinLichHen.loai);
+                subUpdateSuKien(idSukien, idUserAction, thongTinLichHen);
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 confirmUpdate.fire(
                     'Đã hủy',
@@ -741,14 +741,16 @@ function resizeSuKien(info, start, end, idns) {
     })
 }
 
-function subUpdateSuKien(idSukien, idUserAction, title, mota, loai) {
+function subUpdateSuKien(idSukien, idUserAction, thongTinLichHen) {
     $.ajax({
         url: url_sukien_action,
         type:"POST",
         data:{
-            title: title,
-            mota: mota,
-            loai: loai,
+            title: thongTinLichHen.title,
+            mota: thongTinLichHen.mota,
+            loai: thongTinLichHen.loai,
+            start: thongTinLichHen.start,
+            end: thongTinLichHen.end,
             id: idSukien,
             idns: idUserAction,
             type: 'update'
