@@ -34,4 +34,8 @@ class NhansuRepository extends BaseRepository implements NhansuRepositoryInterfa
             ->where('nhansu.id', $id)
             ->get();
     }
+
+    public function getDetailNhanSu($id) {
+        return $this->model::find($id);
+    }
 }

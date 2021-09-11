@@ -9,5 +9,8 @@ class CosoRepository extends BaseRepository implements CosoRepositoryInterface
     public function getModel(){
         return \App\Models\Admin\CosoModel::class;
     }
+    // public function modelcity(){
+    //     return \App\Models\Admin\City::class;
+    // }
 
 }

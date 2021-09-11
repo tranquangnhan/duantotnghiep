@@ -22,4 +22,11 @@ class Controller extends BaseController
     const STATUS_SUKIEN = 0;
     const STATUS_XIN_NGHI = 1;
     const STATUS_ACCEPT_XIN_NGHI = 2;
+
+    public function moveIMG($name, $tmp)
+    {
+        $target_dir = 'admin/images/users/';
+        $target_file = $target_dir . $name;
+        move_uploaded_file($tmp, $target_file);
+    }
 }

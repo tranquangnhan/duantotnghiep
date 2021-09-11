@@ -1,10 +1,9 @@
 <?php
 
 
-namespace App\Repositories\SuKien;
+namespace App\Repositories\Sukien;
 
-
-interface SuKienRepositoryInterface
+interface SukienRepositoryInterface
 {
     public function getAll();
 
@@ -15,4 +14,6 @@ interface SuKienRepositoryInterface
     public function update($id,$attributes = []);
 
     public function delete($id);
+
+    public function updateTrangThaiXinNghi($id, $trangThai);
 }

@@ -1,6 +1,10 @@
 @extends('Admin/layoutadmin')
 @section('content')
     <style>
+        #imageA img{
+            width: 30%;
+            margin-left: 5px;
+        }
         .wrapper {
 
             width: 45%;
@@ -56,6 +60,8 @@
         }
 
     </style>
+
+
     <div class="content-page">
         <div class="content">
 
@@ -69,7 +75,7 @@
                             <form data-parsley-validate action="{{route('nhansu.update',$data[0]['id'])}}" id="formadd" role="form"
                                 method="post" enctype="multipart/form-data">
                                 @csrf
-                                {!! method_field('put') !!}
+                                {!! method_field('patch') !!}
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -160,9 +166,9 @@
                                         <div class="form-group">
                                             <label for="">Dịch vụ</label><span style="color:red;"> (*)</span>
                                             <select class="form-control" name="dichvu">
-                                                @foreach($data as $dv)
+                                                @foreach($DichVu as $id => $dvkh)
                                                     <option
-                                                        value="{{$dv->id}}" <?php if ($data[0]['iddv'] == $dv->id) echo 'selected';?>>{{$dv->tendv}}</option>
+                                                        value="{{$dvkh->id}}" <?php if ($data[0]['iddv'] == $dvkh->id) echo 'selected';?>>{{$dvkh->tendv}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -173,16 +179,24 @@
                                                     <br>
                                                     <div class="wrapper">
                                                         <div class="file-upload">
-                                                            <input type="file" id="files" name="urlAnh"/>
+                                                            <input type="file" id="files" name="urlAnh[]" multiple>
                                                             <i class="fa fa-arrow-up"></i>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="img" value="{{$data[0]['img']}}">
                                                 <div class="col-md-6">
-                                                    <img id="image"
-                                                         src="{{asset('admin/images/users')}}{{'/'.$data[0]['img']}}"
-                                                         width="45%"/>
+
+                                                    <?php
+                                                    $img= explode(",", $data[0]['img']);
+                                                    ?>
+
+                                                    @foreach($img as $idAnh => $Anh)
+                                                            <img class="imageS1"
+                                                                 src="{{asset('admin/images/users')}}{{'/'.$Anh}}"
+                                                                 width="45%"/>
+                                                    @endforeach
+                                                        <div id="imageA"></div>
                                                 </div>
                                             </div>
 
@@ -218,15 +232,28 @@
     </div>
     <script>
         document.getElementById("files").onchange = function () {
-            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                // get loaded data and render thumbnail.
-                document.getElementById("image").src = e.target.result;
-            };
+            var ListImages =document.getElementById("files").files;
+            if (ListImages.length>0){
+                for (let i=0; i< ListImages.length ; i++ ){
+                    var filetoload = ListImages[i];
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var srcData= e.target.result;
+                        var newIMG=document.createElement('img');
+                        newIMG.src=srcData;
+                        document.getElementById("imageA").innerHTML += newIMG.outerHTML;
 
-            // read the image file as a data URL.
-            reader.readAsDataURL(this.files[0]);
+                        var xx = document.querySelectorAll('.imageS1');
+                        for (i = 0; i < xx.length; i++) {
+                            xx[i].style.display = "none";
+                        }
+                    };
+                    //
+                    // // read the image file as a data URL.
+                    reader.readAsDataURL(filetoload);
+                }
+            }
         };
     </script>
 @endsection
