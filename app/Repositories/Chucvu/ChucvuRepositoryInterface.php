@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\Repositories\Danhmuc;
+namespace App\Repositories\Chucvu;
 
-interface DanhmucRepositoryInterface
+interface ChucvuRepositoryInterface 
 {
     public function getAll();
 

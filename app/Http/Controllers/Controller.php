@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
+    const BASE_URL_UPLOAD = 'admin/images/users/';
     const ROLE_ADMIN = 1;
     const ROLE_NHANVIEN = 2;
     const CHAMCONG_OFF = 0;
@@ -24,10 +24,27 @@ class Controller extends BaseController
     const STATUS_XIN_NGHI = 1;
     const STATUS_ACCEPT_XIN_NGHI = 2;
 
-    public function moveIMG($name, $tmp)
+    public function uploadManyImage($request)
     {
-        $target_dir = 'admin/images/users/';
-        $target_file = $target_dir . $name;
-        move_uploaded_file($tmp, $target_file);
+        $allowedfileExtension = ['jpg', 'png', 'gif'];
+        $imgAnh = "";
+        $dateTime  = time();
+        foreach ($request as $id => $row) {
+            $extension = $row->getClientOriginalExtension();
+            $check = in_array($extension, $allowedfileExtension);
+            if (!$check) {
+                die("ảnh không hợp lệ");
+                break;
+            } else {
+                $imgAnh .= $dateTime.'-'.$request[$id]->getClientOriginalName() . ',';
+                $imgtmp = $request[$id]->getPathName();
+                $upImages = $dateTime.'-'.$request[$id]->getClientOriginalName();
+                $target_dir = Controller::BASE_URL_UPLOAD;
+                $target_file = $target_dir . $upImages;
+                move_uploaded_file($imgtmp, $target_file);
+            }
+        }
+        $imgHinh = rtrim($imgAnh, ','); 
+        return $imgHinh;
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\NhanSu;
 use App\Http\Requests\NhanSuUpdate;
 use App\Repositories\Dichvu\DichvuRepositoryInterface;
 use App\Repositories\Nhansu\NhansuRepositoryInterface;
+use App\Repositories\Chucvu\ChucvuRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +15,16 @@ class NhansuController extends Controller
 {
     protected $nhansu;
     protected $dichvu;
-
-    public function __construct(NhansuRepositoryInterface $nhansu, DichvuRepositoryInterface $dichvu)
+    protected $chucvu;
+    public function __construct(
+        NhansuRepositoryInterface $nhansu,
+        DichvuRepositoryInterface $dichvu,
+        ChucvuRepositoryInterface $chucvu
+    )
     {
         $this->nhansu = $nhansu;
         $this->dichvu = $dichvu;
+        $this->chucvu = $chucvu;
     }
 
     /**
@@ -28,7 +34,9 @@ class NhansuController extends Controller
      */
     public function index()
     {
+        
         $data = $this->nhansu->getAll();
+        
         return view('Admin.Nhansu.index', compact('data'));
     }
 
@@ -39,8 +47,11 @@ class NhansuController extends Controller
      */
     public function create()
     {
+         
         $data = $this->dichvu->getAll();
-        return view('Admin.Nhansu.create', compact('data'));
+        $chucvu = $this->chucvu->getAll();
+
+        return view('Admin.Nhansu.create', ['data'=>$data,'chucvu'=>$chucvu]);
     }
 
     /**
@@ -51,44 +62,25 @@ class NhansuController extends Controller
      */
     public function store(NhanSu $request)
     {
-        $allowedfileExtension = ['jpg', 'png', 'gif'];
-        $imgAnh = "";
-        $files = $request->file('urlHinh');
-        foreach ($files as $id => $row) {
-            $extension = $row->getClientOriginalExtension();
-            $check = in_array($extension, $allowedfileExtension);
-            if (!$check) {
-                //bắt lỗi
-                echo "ảnh không hợp lệ";
-                break;
-            } else {
-                $imgAnh .= $_FILES["urlHinh"]["name"][$id] . ',';
-                $imgtmp = $_FILES["urlHinh"]["tmp_name"][$id];
-                $upImages = $_FILES["urlHinh"]["name"][$id];
-
-                $this->moveIMG($upImages, $imgtmp);
-            }
-        }
-        $imgHinh = rtrim($imgAnh, ',');
+        $imgHinh = $this->uploadManyImage($request->file('urlAnh'));
         $CheckEmail = $this->nhansu->CheckEmail($request->email);
         if ($CheckEmail == true) {
             $ns = [
                 'name' => $request->tennv,
                 'email' => $request->email,
                 'namsinh' => $request->namsinh,
-                'chucvu' => $request->chucvu,
+                'gioitinh' => $request->gioitinh,
+                'img' => $imgHinh,
+                'idcv' => $request->idcv,
+                'iddv' => $request->dichvu,
                 'password' => bcrypt($request->password),
                 'luong' => $request->luong,
-                'gioitinh' => $request->gioitinh,
-                'role' => $request->role,
-                'iddv' => $request->dichvu,
-                'img' => $imgHinh,
                 'danhgia' => $request->danhgia
             ];
             $this->nhansu->create($ns);
             return redirect('/quantri/nhansu')->with('thanhcong', 'Thêm nhân sự thành công');
         } else {
-            return redirect('/quantri/nhansu')->with('thatbai', 'Thêm nhân sự thất bại');
+            return redirect('/quantri/nhansu')->with('thatbai', 'Email đã được sử dụng');
         }
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Chucvu\ChucvuRepository;
+use App\Repositories\Chucvu\ChucvuRepositoryInterface;
 use App\Repositories\Coso\CosoRepository;
 use App\Repositories\Coso\CosoRepositoryInterface;
 use App\Repositories\Danhmuc\DanhmucRepository;
@@ -31,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(SukienRepositoryInterface::class,SukienRepository::class);
         $this->app->singleton(LichRepositoryInterface::class,LichRepository::class);
         $this->app->singleton(CosoRepositoryInterface::class,CosoRepository::class);
+        $this->app->singleton(ChucvuRepositoryInterface::class,ChucvuRepository::class);
     }
 
     /**

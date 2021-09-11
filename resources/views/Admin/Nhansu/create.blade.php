@@ -89,14 +89,6 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Chức vụ</label><span style="color:red;"> (*)</span>
-                                            <input type="text" name="chucvu" value="{{old('chucvu')}}"  parsley-trigger="change"
-                                                   placeholder="Chức vụ"  class="form-control" >
-                                            @error('chucvu')
-                                            <span class="badge badge-danger">{{$message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
                                             <label for="">Mật khẩu</label><span style="color:red;"> (*)</span>
                                             <input type="password" name="password" value="{{old('password')}}"  parsley-trigger="change"
                                                    placeholder="Mật khẩu"  class="form-control" >
@@ -139,10 +131,11 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="">Rule</label><span style="color:red;"> (*)</span>
-                                            <select class="form-control" name="role">
-                                                <option value="0">CTV</option>
-                                                <option value="1">Admin</option>
+                                            <label for="">Chức vụ</label><span style="color:red;"> (*)</span>
+                                            <select class="form-control" name="idcv">
+                                                @foreach ($chucvu as $row)
+                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 

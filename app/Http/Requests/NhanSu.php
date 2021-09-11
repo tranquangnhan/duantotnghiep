@@ -25,10 +25,10 @@ class NhanSu extends FormRequest
         return [
             'tennv' => ['required','min:3','max:25'],
             'email'=>['required','min:3','email'],
-            'chucvu'=>['required','min:3','max:20'],
             'password'=>['required','min:5','max:25'],
             'luong'=>['required','min:100000','max:100000000', 'integer'],
-            'urlHinh'=>['required']
+            'urlAnh'=>['required'],
+            'idcv'=>['required']
         ];
     }
 
@@ -41,17 +41,14 @@ class NhanSu extends FormRequest
             'email.min' => 'Email ngắn quá vậy',
             'email.max' => 'Email dài quá vậy',
             'email.email' => 'Bạn phải nhập đúng định dạng email',
-            'chucvu.required' => 'Phải nhập chức vụ nha',
-            'chucvu.min' => 'Chức vụ ngắn quá vậy',
-            'chucvu.max' => 'Chức vụ quá dài quá bồ ơi',
-            'password.required' => 'Phải nhập mật khẩu nha',
             'password.min' => 'Mật khẩu ngắn quá vậy',
             'password.max' => 'Mật khẩu dài quá bồ ơi',
             'luong.required' => 'Phải nhập lương nhân viên nha',
             'luong.min' => 'Lương phải lớn hơn 100k',
             'luong.max' => 'Lương phải nhỏ hơn 1 tỷ',
             'luong.integer' => 'Lương phải là số',
-            'urlHinh.required' => 'Phải tải hình nhân viên nha',
+            'urlAnh.required' => 'Phải tải hình nhân viên nha',
+            'idcv.required' => 'Phải chọn chức vụ',
         ];
     }
 
@@ -59,10 +56,10 @@ class NhanSu extends FormRequest
         return [
             'name' => 'Tên nhân viên',
             'email'=> 'Email ',
-            'chucvu'=> 'Chức vụ',
             'password'=> 'Mật khẩu',
             'luong'=> 'Lương',
-            'urlHinh'=> 'Ảnh '
+            'urlAnh'=> 'Ảnh',
+            'idcv' => 'id chức vụ'
         ];
     }
 }
