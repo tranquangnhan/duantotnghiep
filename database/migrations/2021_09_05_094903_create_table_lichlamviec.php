@@ -15,13 +15,14 @@ class CreateTableLichlamviec extends Migration
     {
         Schema::create('lich', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idcoso');
+            $table->unsignedInteger('idcoso');
             $table->string('thu', 20);
             $table->integer('soluongkhach');
             $table->time('giobatdau');
             $table->time('gioketthuc');
             $table->boolean('type');
             $table->string('ghichu', 100);
+            $table->foreign('idcoso')->references('id')->on('coso');
             $table->timestamps();
         });
     }

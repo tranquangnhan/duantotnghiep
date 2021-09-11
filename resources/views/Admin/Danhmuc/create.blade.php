@@ -29,7 +29,7 @@
 
                             <h4 class="header-title mt-0 mb-3">Nhập Tên Danh Mục</h4>
 
-                            <form data-parsley-validate action="{{route('danhmuc.store')}}" id="formadd" novalidate onsubmit="return submitForm()" method="post" enctype="multipart/form-data">
+                            <form data-parsley-validate action="{{route('danhmuc.store')}}"  novalidate onsubmit="return submitForm()" method="post" enctype="multipart/form-data">
                                 @csrf
 
 
@@ -47,7 +47,7 @@
 
                                 <div class="form-group text-right mb-0 mt-5">
                                     <input type="submit" name="them" class="btn btn-primary waves-effect waves-light mr-1" value="Thêm" id='add_product'>
-                                    <a href="/admin123/danhmuc" clas="btn btn-secondary waves-effect waves-light">Hủy</a>
+                                    <a href="/quantri/danhmuc" clas="btn btn-secondary waves-effect waves-light">Hủy</a>
                                 </div>
 
                             </form>

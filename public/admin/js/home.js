@@ -12,6 +12,23 @@ const STATUS_XIN_NGHI = 1;
 const STATUS_ACCEPT_XIN_NGHI = 2;
 
 $(document).ready(function() {
+    $('#table_product').DataTable(
+        {
+            "language": {
+                "search":"Tìm Kiếm:",
+                "sProcessing": "Đang xử lý...",
+                "lengthMenu": "Xem _MENU_ mục",
+                "zeroRecords": "Không có dữ liệu",
+                "info": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục.",
+                "paginate": {
+                    "first":      "Trang đầu",
+                    "last":       "Trang cuối",
+                    "next":       "Trang Sau",
+                    "previous":   "Trang Trước"
+                },
+            }
+        }
+    );
     $('#table_product').DataTable({
         "pageLength": 4
     });
@@ -37,9 +54,6 @@ function submitForm() {
         }
 
     }
-
-
-
 }
 
 function checkDelete(link) {

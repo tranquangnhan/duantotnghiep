@@ -33,6 +33,7 @@ Route::post('/admin/dangnhapadmin', [\App\Http\Controllers\DangnhapAdminControll
 
 Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::get('/', [\App\Http\Controllers\DangnhapAdminController::class, 'index']);
+   
     Route::resource('danhmuc', DanhMucController::class);
 
     Route::resource('dichvu', DichvuController::class);

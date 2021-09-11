@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Createkhachhang extends Migration
+class ChucVu extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class Createkhachhang extends Migration
      */
     public function up()
     {
-        Schema::create('khachhang', function (Blueprint $table) {
-            $table->id();
+        Schema::create('chucvu', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name',255);
-            $table->string('sdt',11);
+            $table->unsignedTinyInteger('role')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class Createkhachhang extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('khachhang');
+        Schema::dropIfExists('chucvu');
     }
 }

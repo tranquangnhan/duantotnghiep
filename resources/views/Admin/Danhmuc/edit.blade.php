@@ -47,7 +47,7 @@
 
                                 <div class="form-group text-right mb-0 mt-5">
                                     <input type="submit" name="them" class="btn btn-primary waves-effect waves-light mr-1" value="Sửa" id='add_product'>
-                                    <a href="/admin123/danhmuc" clas="btn btn-secondary waves-effect waves-light">Hủy</a>
+                                    <a href="/quantri/danhmuc" clas="btn btn-secondary waves-effect waves-light">Hủy</a>
                                 </div>
 
                             </form>

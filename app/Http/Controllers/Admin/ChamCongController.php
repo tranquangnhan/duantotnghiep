@@ -46,11 +46,10 @@ class ChamCongController extends Controller
     {
         $today = date("Y-m-d");
 
-        $idns = auth()->user()->id;
-        $chamCong = ChamCongModel::where('idns', $idns)
-        ->where('ngay', '=', $today)
-        ->orderByDesc('id')->limit(1)
-        ->first();
+        $idUser = auth()->user()->id;
+        
+        $chamCong = $this->Chamcong->getChamCongByIdUser($idUser);
+       
         // không có chấm công nào
         if ($chamCong == null)
         {
@@ -58,7 +57,7 @@ class ChamCongController extends Controller
             $newChamCong = new ChamCongModel;
             $newChamCong->checkin = $checkIn;
             $newChamCong->ngay = $today;
-            $newChamCong->idns = $idns;
+            $newChamCong->idns = $idUser;
             $newChamCong->trangthai = Controller::CHAMCONG_ON;
             $newChamCong->save();
         }
@@ -79,7 +78,7 @@ class ChamCongController extends Controller
                 $newChamCong = new ChamCongModel;
                 $newChamCong->checkin = $checkIn;
                 $newChamCong->ngay = $today;
-                $newChamCong->idns = $idns;
+                $newChamCong->idns = $idUser;
                 $newChamCong->trangthai = Controller::CHAMCONG_ON;
                 $newChamCong->save();
             }

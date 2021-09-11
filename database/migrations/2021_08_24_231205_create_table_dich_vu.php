@@ -18,10 +18,11 @@ class CreateTableDichVu extends Migration
             $table->string('tendv',255);
             $table->string('slug',255);
             $table->string('img',255);
-            $table->integer('iddm');
+            $table->unsignedInteger('iddm');
             $table->text('mota');
             $table->double('gia',8,0);
             $table->text('content');
+            $table->foreign('iddm')->references('id')->on('danhmuc');
             $table->timestamps();
         });
     }

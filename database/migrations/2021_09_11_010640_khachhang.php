@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableChamcong extends Migration
+class Khachhang extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateTableChamcong extends Migration
      */
     public function up()
     {
-        Schema::create('chamcong', function (Blueprint $table) {
+        Schema::create('khachhang', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('checkin');
-            $table->integer('checkout')->nullable();
-            $table->date('ngay');
-            $table->unsignedInteger('idns');
-            $table->integer('trangthai');
-            $table->foreign('idns')->references('id')->on('nhansu');
+            $table->string('name',255);
+            $table->string('sdt',11);
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateTableChamcong extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chamcong');
+        Schema::dropIfExists('khachhang');
     }
 }

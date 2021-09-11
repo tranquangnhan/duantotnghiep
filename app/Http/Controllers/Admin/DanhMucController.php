@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Danhmuc\DanhmucRepository;
-use Illuminate\Http\Request;
+use App\Http\Requests\DanhMuc;
 use Illuminate\Support\Str;
 class DanhMucController extends Controller
 {
@@ -46,13 +46,9 @@ class DanhMucController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DanhMuc $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-        ],[
-            'name.required'=>'Bạn chưa nhập tên danh mục',
-        ]);
+        $validated = $request->validated();
 
         $data = [
             'name'=> $request->name,
@@ -94,13 +90,9 @@ class DanhMucController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DanhMuc $request, $id)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-        ],[
-            'name.required'=>'Bạn chưa nhập tên danh mục',
-        ]);
+        $validated = $request->validated();
 
         $data = [
             'name'=> $request->name,
