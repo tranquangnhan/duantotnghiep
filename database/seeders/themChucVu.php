@@ -13,7 +13,7 @@ class themChucVu extends Seeder
      */
     public function run()
     {
-        DB::table('sukien')->insert([
+        DB::table('chucvu')->insert([
             [ 'name' => 'admin', 'role' => '0'],
             [ 'name' => 'manager', 'role' => '1'],
             [ 'name' => 'staff', 'role' => '2'],
