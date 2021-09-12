@@ -1,17 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-
 use App\Http\Controllers\Controller;
 use App\Models\Admin\City;
 use App\Models\Admin\Province;
 use App\Models\Admin\Wards;
 use App\Models\Admin\CosoModel;
 use App\Repositories\Coso\CosoRepository;
-use Doctrine\Inflector\Rules\Word;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 class CosoController extends Controller
 {
     private $Coso;
@@ -62,8 +58,6 @@ class CosoController extends Controller
 
                     $output.='<option value="'.$province->maqh.'">'.$province->name_quanhuyen.'</option>';
                 }
-
-
             }else{
                 $select_wards = Wards::where('maqh',$data['ma_id'])->orderby('xaid','ASC')->get();
                 $output.='<option>---Chọn xã phường---</option>';
@@ -98,8 +92,17 @@ class CosoController extends Controller
         $free->diachi = $data['wards'];
         $free->save();
 
+        
+        //  * Tưởng sửa lại phía trên phần lưu
+        // *Create lịch
+        //        $ThuNgay=['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
+        //        for ($i=0; $i<7; $i++){
+        //
+        //        }
+        //
 
-    }
+
+       }
 
     /**
      * Display the specified resource.
@@ -138,8 +141,6 @@ class CosoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
 
         $data = [
             'name'=> $request->name,

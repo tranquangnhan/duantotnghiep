@@ -14,14 +14,15 @@ class CreateTableSukien extends Migration
     public function up()
     {
         Schema::create('sukien', function (Blueprint $table) {
-            $table->id();
-            $table->integer('idns');
-            $table->string('tieude', 255);
+            $table->increments('id');
+            $table->unsignedInteger('idns');
+            $table->string('title', 255);
             $table->text('mota')->nullable();
             $table->dateTime('start');
             $table->dateTime('end');
             $table->integer('loai');
             $table->integer('trangthai');
+            $table->foreign('idns')->references('id')->on('nhansu');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreateTableSukien extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_sukien');
+        Schema::dropIfExists('sukien');
     }
 }

@@ -14,14 +14,15 @@ class CreateTableDichVu extends Migration
     public function up()
     {
         Schema::create('dichvu', function (Blueprint $table) {
-            $table->id();
-            $table->string('name',255);
+            $table->increments('id');
+            $table->string('tendv',255);
             $table->string('slug',255);
             $table->string('img',255);
-            $table->integer('iddm')->default(0);
+            $table->unsignedInteger('iddm');
             $table->text('mota');
             $table->double('gia',8,0);
             $table->text('content');
+            $table->foreign('iddm')->references('id')->on('danhmuc');
             $table->timestamps();
         });
     }

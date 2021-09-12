@@ -14,12 +14,13 @@ class CreateTableChamcong extends Migration
     public function up()
     {
         Schema::create('chamcong', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('checkin');
             $table->integer('checkout')->nullable();
             $table->date('ngay');
-            $table->integer('idns');
+            $table->unsignedInteger('idns');
             $table->integer('trangthai');
+            $table->foreign('idns')->references('id')->on('nhansu');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateTableChamcong extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_chamcong');
+        Schema::dropIfExists('chamcong');
     }
 }

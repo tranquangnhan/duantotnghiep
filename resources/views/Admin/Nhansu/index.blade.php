@@ -21,7 +21,6 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     @foreach ($data as $i=> $row)
                         <tr>
                             <td>{{$i+=1}}</td>
@@ -35,7 +34,7 @@
                                 <?php $img= explode(",", $row->img);
                                 ?>
                                 @foreach($img as $idAnh => $Anh)
-                                        <img class="mb-2" width="90" src="{{asset("admin/images/users")}}{{'/'.$Anh}}">
+                                        <img class="mb-2" width="90" src="{{asset("admin/images/dichvu")}}{{'/'.$Anh}}">
                                     @endforeach
                             </td>
                             <td>

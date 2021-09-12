@@ -1,7 +1,13 @@
 @extends('Admin.layoutadmin')
 
 @section('content')
+<style>
 
+    img{
+        width: 70px;
+        height: 50px;
+    }
+</style>
     <div class="content-page">
         <div class="content">
             <!-- Start Content-->
@@ -11,11 +17,11 @@
                     <thead class="thead-light">
                     <tr>
                         <th width="5px">STT</th>
-                        <th width="25%">Tên DV</th>
-                        <th width="15%">Hình ảnh</th>
-                        <th width="20px">Danh mục</th>
+                        <th width="20%">Tên DV</th>
+                        <th width="">Hình ảnh</th>
+                        <th width="15%">Danh mục</th>
                         <th width="30px">Mô tả</th>
-                        <th width="30px">Giá</th>
+                        <th width="20px">Giá</th>
                         <th width="5px">Xóa</th>
                         <th width="5px">Sửa</th>
 
@@ -29,18 +35,23 @@
                             <td class="">
                                 {{$row->name}} 
                             </td>
-                            <td width="15%" class="text-center">
-                                <img class="" width="90" src="{{asset("admin/images/dichvu")}}{{'/'.$row->img}}">
+                            <td width="25%" class="text-center">
+                                <?php $img= explode(",", $row->img);
+                                ?>
+                                @foreach($img as $idAnh => $Anh)
+                                        <img class="mb-2" width="90" src="{{asset("admin/images/dichvu")}}{{'/'.$Anh}}">
+                                    @endforeach
                             </td>
+                    @foreach ($DanhMuc as $id=> $rew)
                             <td>
-                               {{$row->name}}
+                               {{$rew->name}}
 
                             </td>
                             <td>
                                 {{$row->mota}}
  
                              </td>
-                            <td width="20%">
+                            <td width="16%">
                                 {{number_format($row->gia), ''}} VND
                             </td>
                             <td>
@@ -56,6 +67,8 @@
                             </td>
                         </tr>
                     @endforeach
+                    @endforeach
+
                     </tbody>
                 </table>
                 <div class="row d-flex justify-content-end">

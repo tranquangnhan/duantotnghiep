@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card-box">
-                        <h4 class="mt-0 header-title">Danh mục </h4>
+                        <h2 class="mt-0 header-title">Danh mục </h2>
                         <p class="text-muted font-14 mb-3">
                        Đây là danh mục
                         </p>
@@ -24,8 +24,29 @@
                             <div class="alert alert-danger">
                                 <p>{{Session::get('error')}}</p>
                             </div>
-                        @endif
+<<<<<<< HEAD
+                        @endif 
+                        <h5>Thêm Nhanh Danh Mục</h5>
+                         <form data-parsley-validate action="{{route('danhmuc.store')}}" id="formadd" novalidate onsubmit="return submitForm()" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                            
+                                <div class="col-lg-4">
+                                   
+                                    <input type="text" name="name" value="{{old('name')}}"  parsley-trigger="change" required
+                                    placeholder="Tên Danh Mục"  class="form-control @error('name') border-error @enderror" >
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="submit" name="them" class="btn btn-primary waves-effect waves-light mr-1" value="Thêm" id='add_product'>
+                                </div>
+                            </div>
+                         </form>
+
                         <table class="table mb-0" id="table_product">
+=======
+                        @endif
+                        <table class="table mb-0 table-bordered" id="table_product">
+>>>>>>> 587bc45ce36a7d7dbf45286653402a0befdc216b
                                 <thead class="thead-light">
                                     <tr>
                                         <th width="5px">STT</th>

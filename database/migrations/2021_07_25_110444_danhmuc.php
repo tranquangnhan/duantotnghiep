@@ -14,7 +14,7 @@ class Danhmuc extends Migration
     public function up()
     {
         Schema::create('danhmuc', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('name',255);
             $table->string('slug',255);
             $table->timestamps();
@@ -29,6 +29,6 @@ class Danhmuc extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('danhmuc');
     }
 }

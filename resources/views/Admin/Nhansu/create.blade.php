@@ -89,14 +89,6 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Chức vụ</label><span style="color:red;"> (*)</span>
-                                            <input type="text" name="chucvu" value="{{old('chucvu')}}"  parsley-trigger="change"
-                                                   placeholder="Chức vụ"  class="form-control" >
-                                            @error('chucvu')
-                                            <span class="badge badge-danger">{{$message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
                                             <label for="">Mật khẩu</label><span style="color:red;"> (*)</span>
                                             <input type="password" name="password" value="{{old('password')}}"  parsley-trigger="change"
                                                    placeholder="Mật khẩu"  class="form-control" >
@@ -139,10 +131,11 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="">Rule</label><span style="color:red;"> (*)</span>
-                                            <select class="form-control" name="role">
-                                                <option value="0">CTV</option>
-                                                <option value="1">Admin</option>
+                                            <label for="">Chức vụ</label><span style="color:red;"> (*)</span>
+                                            <select class="form-control" name="idcv">
+                                                @foreach ($chucvu as $row)
+                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 
@@ -156,20 +149,29 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                    <label for="formFile" class="form-label">Tải ảnh nhân viên</label> <br>
+                                                <div class="col-md-6">
+                                                    <label for="formFile" class="form-label">Tải ảnh nhân viên</label>
+                                                    <br>
                                                     <div class="wrapper">
                                                         <div class="file-upload">
-                                                            <input type="file" id="files" name="urlHinh[]" multiple>
-                                                            <i class="fa fa-arrow-up" ></i>
+                                                            <input type="file" id="files" name="urlAnh[]" multiple>
+                                                            <i class="fa fa-arrow-up"></i>
                                                         </div>
                                                     </div>
-                                                    @error('urlHinh')
-                                                    <span class="badge bg-danger text-white">{{ $message }}</span>
-                                                    @enderror
                                                 </div>
-                                                <div class="col-md-8">
-                                                    <div id="imageA"></div>
+                                                <input type="hidden" name="img" value="{{$data[0]['img']}}">
+                                                <div class="col-md-6">
+
+                                                    <?php
+                                                    $img= explode(",", $data[0]['img']);
+                                                    ?>
+
+                                                    @foreach($img as $idAnh => $Anh)
+                                                            <img class="imageS1"
+                                                                 src="{{asset('admin/images/users')}}{{'/'.$Anh}}"
+                                                                 width="45%"/>
+                                                    @endforeach
+                                                        <div id="imageA"></div>
                                                 </div>
                                             </div>
 

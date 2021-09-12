@@ -165,6 +165,7 @@
 
                                         <div class="form-group">
                                             <label for="">Dịch vụ</label><span style="color:red;"> (*)</span>
+                                             <label for="">Dịch vụ</label><span style="color:red;"> (*)</span>
                                             <select class="form-control" name="dichvu">
                                                 @foreach($DichVu as $id => $dvkh)
                                                     <option

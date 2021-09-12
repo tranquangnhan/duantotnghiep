@@ -3,7 +3,6 @@
 
 namespace App\Repositories\Danhmuc;
 
-
 interface DanhmucRepositoryInterface
 {
     public function getAll();
@@ -15,6 +14,4 @@ interface DanhmucRepositoryInterface
     public function update($id,$attributes = []);
 
     public function delete($id);
-
-    
 }

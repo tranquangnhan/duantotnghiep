@@ -3,10 +3,12 @@
 use App\Http\Controllers\Admin\ChamCongController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DichvuController;
+use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NhansuController;
 use App\Http\Controllers\Admin\SuKienController;
 use App\Http\Controllers\Admin\CosoController;
+use App\Http\Controllers\Admin\LichlamviecController;
 use App\Http\Controllers\Admin\DonhangController;
 use App\Models\admin\ChamCongModel;
 use Illuminate\Support\Facades\Route;
@@ -32,10 +34,14 @@ Route::post('/admin/dangnhapadmin', [\App\Http\Controllers\DangnhapAdminControll
 
 Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::get('/', [\App\Http\Controllers\DangnhapAdminController::class, 'index']);
+
     Route::resource('danhmuc', DanhMucController::class);
 
     Route::resource('dichvu', DichvuController::class);
-    Route::post('dichvu/{id}', [DichvuController::class, 'update']);
+    // Route::post('dichvu/{id}', [DichvuController::class, 'update']);
+
+    Route::resource('khachhang', KhachHangController::class);
+    // Route::post('khachhang/{id}', [KhachHangController::class, 'update']);
 
     Route::resource('chamcong', ChamCongController::class);
     Route::group(['prefix' => 'chamcong'], function (){
@@ -56,7 +62,9 @@ Route::group(['prefix' => 'quantri', 'middleware' => 'adminLogin'], function (){
     Route::post('/add-dellivery', [CosoController::class,'add_dellivery']);
     Route::post('/update', [CosoController::class,'update']);
 
+    Route::resource('/lichlamviec', LichlamviecController::class);
+
     // đơn đặt hàng
     Route::resource('donhang', DonhangController::class);
-
 });
+

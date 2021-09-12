@@ -23,9 +23,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
         <link href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css" rel="stylesheet" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     </head>
 
     <style>
@@ -298,12 +298,11 @@
                     <li>
                         <a href="javascript: void(0);">
                             <i class="mdi mdi-page-layout-sidebar-left"></i>
-                            <span> Lịch </span>
+                            <span> Lịch làm việc </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="{{url('/quantri/addfilm')}}">Thêm mới </a></li>
-                            <li><a href="{{url('/quantri')}}">Danh sách</a></li>
+                            <li><a href="{{url('/quantri/lichlamviec')}}">Danh sách</a></li>
                         </ul>
                     </li>
                     <li>
@@ -464,61 +463,8 @@
     </a>
 
     <!-- Vendor js -->
+        <script src="{{ asset('admin/js') }}/home.js"></script>
     <script src="{{ asset('admin/js') }}/vendor.min.js"></script>
-
-        <script type="text/javascript">
-    $(document).ready(function(){
-        $('.them').click(function(){
-          var name = $('.name').val();
-          var city = $('.city').val();
-          var province = $('.province').val();
-          var wards = $('.wards').val();
-          var _token = $('input[name="_token"]').val();
-
-          $.ajax({
-            url: '{{url("/quantri/add-dellivery")}}',
-            method:'POST',
-            data:{name:name,city:city,province:province,wards:wards,_token:_token},
-            complete: function () {
-        // Handle the complete event
-        window.location.replace("quantri/coso");
-
-        alert('thêm cơ sở thành công');
-      }
-
-            });
-        });
-
-    });
-
-
-    $('.choose').on('change',function(){
-        var action = $(this).attr('id');
-        var ma_id = $(this).val();
-        var _token = $('input[name="_token"]').val();
-
-        var result = '';
-
-        if(action=='city'){
-            result = 'province';
-        }else{
-            result = 'wards';
-        }
-        $.ajax({
-
-            url: '{{url("/quantri/select-dellivery")}}',
-        //    cache: false,
-        //      contentType: false,
-        //     processData: false,
-            method:'POST',
-            data:{action:action,ma_id:ma_id,_token:_token},
-            success:function(data){
-               $('#'+result).html(data);
-            }
-        });
-    });
-
-    </script>
 
     <!-- knob plugin -->
     <script src="{{ asset('admin/libs') }}/jquery-knob/jquery.knob.min.js"></script>
@@ -560,7 +506,7 @@
     <!-- sweet alert -->
     <script src="{{ asset('admin/js') }}/SweetAlert2.js"></script>
     <!-- end sweet alert -->
-    <script src="{{ asset('admin/js') }}/home.js"></script>
+
     <script src="{{ asset('admin/js') }}/ckfinder.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"> </script>
     <script src="{{ asset('admin/js') }}/validate.js"></script>

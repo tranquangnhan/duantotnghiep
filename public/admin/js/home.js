@@ -6,12 +6,35 @@ const CHAMCONG_OFF_ACCEPT = 2;
 const TIME_CAN_DELETE_CHAMCONG = 30; // MINUTES
 const LOAI_SUKIEN = 0;
 const LOAI_XIN_NGHI = 1;
+const LOAI_MEETING = 2;
 const STATUS_SUKIEN = 0;
 const STATUS_XIN_NGHI = 1;
 const STATUS_ACCEPT_XIN_NGHI = 2;
 
 $(document).ready(function() {
-    $('#table_product').DataTable();
+    $('#table_product').DataTable(
+        {
+            "language": {
+                "search":"Tìm Kiếm:",
+                "sProcessing": "Đang xử lý...",
+                "lengthMenu": "Xem _MENU_ mục",
+                "zeroRecords": "Không có dữ liệu",
+                "info": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục.",
+                "paginate": {
+                    "first":      "Trang đầu",
+                    "last":       "Trang cuối",
+                    "next":       "Trang Sau",
+                    "previous":   "Trang Trước"
+                },
+            }
+        }
+    );
+    $('#table_product').DataTable({
+        "pageLength": 4
+    });
+    $('#table_pro').DataTable({
+
+    });
 });
 
 function submitForm() {
@@ -31,9 +54,6 @@ function submitForm() {
         }
 
     }
-
-
-
 }
 
 function checkDelete(link) {

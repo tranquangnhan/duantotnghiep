@@ -11,6 +11,9 @@ class NhansuModel extends Model
     protected $table ='nhansu';
     protected $primaryKey= 'id';
     protected $fillable= [
-        'name', 'email', 'namsinh', 'chucvu', 'password', 'luong', 'gioitinh', 'role', 'iddv', 'img', 'danhgia'
+        'name', 'email', 'namsinh',
+        'password', 'luong','remember_token', 'gioitinh',
+        'idcv', 'iddv', 'img',
+        'danhgia'
     ];
 }

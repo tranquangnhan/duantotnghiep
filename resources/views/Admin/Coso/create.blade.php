@@ -31,8 +31,6 @@
 
                             <form >
                                 @csrf
-
-
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
@@ -78,9 +76,8 @@
 
                                 <div class="form-group text-right mb-0 mt-5">
                                     <input type="submit" name="them" class="btn btn-primary waves-effect waves-light mr-1 them" value="Thêm" id='add_product'>
-                                    <a href="/admin/coso" clas="btn btn-secondary waves-effect waves-light">Hủy</a>
+                                    <a href="{{URL::to("/quantri/coso")}}" class="btn btn-danger waves-effect waves-light">Hủy</a>
                                 </div>
-
                             </form>
                         </div>
                     </div><!-- end col -->
