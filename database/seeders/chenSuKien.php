@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class them_sukien extends Seeder
+class chenSuKien extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +16,8 @@ class them_sukien extends Seeder
     {
         $date = date("Y-m-d H:i:s");
         DB::table('sukien')->insert([
-            ['idns' => 17, 'title' => 'Xin nghỉ bị bửa đó làm biếng quá', 'mota' => '', 'start' => $date, 'end'=> $date, 'loai' => 0, 'trangthai' => 1],
-            ['idns' => 18, 'title' => 'Thích thì nghỉ', 'mota' => '', 'start' => $date, 'end'=> $date, 'loai' => 0, 'trangthai' => 0]
+            ['idns' => 2, 'title' => 'Xin nghỉ bị bửa đó làm biếng quá', 'mota' => '', 'start' => $date, 'end'=> $date, 'loai' => 0, 'trangthai' => 1],
+            ['idns' => 3, 'title' => 'Thích thì nghỉ', 'mota' => '', 'start' => $date, 'end'=> $date, 'loai' => 0, 'trangthai' => 0]
         ]);
     }
 }

@@ -16,9 +16,9 @@ class TaoTablecoso extends Migration
         Schema::create('coso', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',255);
-            $table->integer('tinh');
-            $table->integer('quanhuyen');
-            $table->integer('diachi');
+            $table->string('tinh', 5);
+            $table->string('quanhuyen', 5);
+            $table->string('diachi', 5);
             $table->timestamps();
         });
     }

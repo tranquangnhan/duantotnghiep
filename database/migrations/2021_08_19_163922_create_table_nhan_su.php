@@ -22,12 +22,14 @@ class CreateTableNhanSu extends Migration
             $table->string('img',255);
             $table->unsignedInteger('idcv');
             $table->unsignedInteger('iddv');
+            $table->unsignedInteger('idcoso');
             $table->text('danhgia')->nullable();
             $table->string('password');
             $table->double('luong',8,0);
             $table->rememberToken();
             $table->foreign('idcv')->references('id')->on('chucvu');
             $table->foreign('iddv')->references('id')->on('dichvu');
+            $table->foreign('idcoso')->references('id')->on('coso');
             $table->timestamps();
         });
     }
