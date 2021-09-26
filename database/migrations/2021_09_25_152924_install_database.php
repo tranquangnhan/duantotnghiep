@@ -30,7 +30,8 @@ class InstallDatabase extends Migration
         Schema::dropIfExists('sanphamchitiet');
         Schema::dropIfExists('donhang');
         Schema::dropIfExists('donhangchitiet');
-        
+        Schema::dropIfExists('nhanvien');
+
         Schema::create('danhmuc', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',255);
@@ -199,7 +200,7 @@ class InstallDatabase extends Migration
         Schema::create('sanphamchitiet', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('idsanpham');
-            $table->tinyInteger('ml');
+            $table->string('ml',4);
             $table->unsignedInteger('soluotmua');
             $table->unsignedInteger('tonkho');
             $table->double('dongia',10,0);
@@ -238,6 +239,26 @@ class InstallDatabase extends Migration
             $table->timestamps();
         });
 
+        Schema::create('nhanvien', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('idcoso');
+            $table->unsignedInteger('iddichvu');
+            $table->string('email',255)->unique();
+            $table->string('password',255);
+            $table->boolean('role');
+            $table->boolean('active');
+            $table->string('name',255);
+            $table->string('img',255);
+            $table->string('namsinh',4);
+            $table->boolean('gioitinh');
+            $table->string('sdt',10);
+            $table->string('avatar',255);
+            $table->boolean('trangthai');
+            $table->foreign('idcoso')->references('id')->on('coso');
+            $table->foreign('iddichvu')->references('id')->on('dichvu');
+            $table->rememberToken();
+            $table->timestamps();
+        });
 
         Schema::enableForeignKeyConstraints();
 
